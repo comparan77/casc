@@ -16,6 +16,12 @@
  * specific language governing permissions and limitations
  * under the License.
  */
+var lstTarima = [];
+var Tarima = function(tarima, posicion) {
+    this.Tarima = tarima;
+    this.Posicion = posicion;
+}
+
 var app = {
     // Application Constructor
     initialize: function() {
@@ -39,6 +45,23 @@ var app = {
     // Update DOM on a Received Event
     receivedEvent: function(id) {
         //console.log('Received Event: ' + id);
-        x$('.loading').removeClass('loading').addClass('ready');
+        //x$('.loading').removeClass('loading').addClass('ready');
+        x$('#btn_set').on('click', function (event) {
+            addTarima();
+        });
+        
+        x$('#btn_get').on('click', function (event) {
+            alert(localStorage.getItem('tarima'));
+        });
     }
 };
+
+function myFunction() {
+    document.getElementsByClassName("topnav")[0].classList.toggle("responsive");
+}
+
+function addTarima(){
+    var oTar = new Tarima('TAR1','POS1');
+    lstTarima.push(oTar);
+    localStorage.setItem("tarima", JSON.stringify(lstTarima));
+}

@@ -42,7 +42,7 @@
     <title>Hello World</title>
     
     <script type="text/javascript" src="cordova.js"></script>
-    <script type="text/javascript" src="js/iscroll-lite.js"></script>
+    <!--<script type="text/javascript" src="js/iscroll.js"></script>-->
     <script type="text/javascript" src="js/fastclick.js"></script>
     <script type="text/javascript" src="js/xui-2.3.2.min.js"></script>
     <script type="text/javascript" src="js/index.js"></script>
@@ -52,11 +52,24 @@
 </head>
 
 <body>
-    <div class="app">
-        <div class="event loading">
-                       
-        </div>
-    </div>
+    
+<ul class="topnav">
+  <li><a class="active" href="#home">Home</a></li>
+  <li><a href="#news">News</a></li>
+  <li><a href="#contact">Contact</a></li>
+  <li><a href="#about">About</a></li>
+  <li class="icon">
+    <a href="javascript:void(0);" style="font-size:15px;" onclick="myFunction()">&#9775;</a>
+  </li>
+</ul>
+
+<div style="padding-left:16px">
+  <h2>Responsive Topnav Example</h2>
+  <p>Resize the browser window to see how it works.</p>
+  <button id="btn_set" type="button">Agrega Tarima</button>
+  <button id="btn_get" type="button">Obten Tarima</button>
+</div>
+    
 </body>
 
 </html>
