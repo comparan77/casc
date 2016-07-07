@@ -53,6 +53,11 @@ var app = {
         x$('#btn_get').on('click', function (event) {
             alert(localStorage.getItem('tarima'));
         });
+        
+        x$('#btn_clear').on('click', function (event) {
+            localStorage.clear();
+            alert('Se ha limpiado correctamente la información');
+        });
     }
 };
 
@@ -61,7 +66,11 @@ function myFunction() {
 }
 
 function addTarima(){
-    var oTar = new Tarima('TAR1','POS1');
-    lstTarima.push(oTar);
+    var oTar;
+    for(var i=1; i<4815; i++){
+        oTar = new Tarima('TAR_' + i,'POS_' + 1);
+        lstTarima.push(oTar);
+    }
+    
     localStorage.setItem("tarima", JSON.stringify(lstTarima));
 }
