@@ -47,3 +47,17 @@ ul.topnav li.icon {display: none;}
     text-align: left;
   }
 }
+
+/*Generales*/
+.active 
+{ 
+  background-color: #4caf50 !important;
+  color: #fff !important; 
+}
+
+.hidden
+{
+  visibility: hidden;
+}
+
+/*Operation*/

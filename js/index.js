@@ -22,6 +22,8 @@ var Tarima = function(tarima, posicion) {
     this.Posicion = posicion;
 }
 
+var oCtrlr = new Controler();
+
 var app = {
     // Application Constructor
     initialize: function() {
@@ -44,23 +46,31 @@ var app = {
     },
     // Update DOM on a Received Event
     receivedEvent: function(id) {
+        try {
+            oCtrlr.InitMenu();    
+        } catch (error) {
+            alert(error.message);
+        }
+        
+        
         //console.log('Received Event: ' + id);
         //x$('.loading').removeClass('loading').addClass('ready');
-        x$('#btn_set').on('click', function (event) {
-            addTarima();
-        });
+        //x$('#btn_set').on('click', function (event) {
+        //    addTarima();
         
-        x$('#btn_get').on('click', function (event) {
-            alert(localStorage.getItem('tarima'));
-        });
+        //});
+        //x$('#btn_get').on('click', function (event) {
+        //    alert(localStorage.getItem('tarima'));
+        //});
         
-        x$('#btn_clear').on('click', function (event) {
-            localStorage.clear();
-            alert('Se ha limpiado correctamente la información');
-        });
+        //x$('#btn_clear').on('click', function (event) {
+        //    localStorage.clear();
+        //    alert('Se ha limpiado correctamente la información');
+        //});
     }
 };
 
+/*
 function myFunction() {
     document.getElementsByClassName("topnav")[0].classList.toggle("responsive");
 }
@@ -73,4 +83,4 @@ function addTarima(){
     }
     
     localStorage.setItem("tarima", JSON.stringify(lstTarima));
-}
+}*/
