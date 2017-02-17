@@ -1,0 +1,64 @@
+<h1>Arribos - Auditor&iacute;a de Unidades</h1>  
+<div class="inputForm">
+    <label>No. de Referencia:</label>
+    <input type="text" id="txt_referencia">
+    <button class="pure-button">Buscar</button>
+</div>
+<table width="97%" class="pure-table pure-table-horizontal">
+    <thead>
+        <tr>
+            <th>&nbsp;</th>
+            <th>Dato esperado</th>
+            <th>Coincide</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr id="tr_operador">
+            <td>Operador</td>
+            <td><span></span></td>
+            <td>
+                <input type="checkbox"><span>No</span>
+                <input type="text">
+            </td>
+        </tr>
+        <tr id="tr_solicitud">
+            <td>Solicitud de Transporte</td>
+            <td><span></span></td>
+            <td>
+                <input type="checkbox"><span>No</span>
+                <input type="text">
+            </td>
+        </tr>
+        <tr>
+            <td>Tipo de veh&iacute;culo</td>
+            <td><span></span></td>
+            <td>
+                <input type="checkbox"><span>No</span>
+                <select id="ddlTipoVehiculo"></select>
+            </td>
+        </tr>
+        <tr id="tr_datos_vehiculo">
+            <td>Datos del veh&iacute;culo</td>
+            <td><span></span></td>
+            <td>
+                <input type="checkbox"><span>No</span>
+                <div class="inputForm">
+                    <label>Placa</label>
+                    <input type="text" id="placa">
+                </div>
+                <div class="inputForm">
+                    <label>Caja</label>
+                    <input type="text" id="caja">
+                </div>
+                <div class="inputForm">
+                    <label>Contenedor 1</label>
+                    <input type="text" id="caja1">
+                </div>
+                <div class="inputForm">
+                    <label>Contenedor 2</label>
+                    <input type="text" id="caja2">
+                </div>
+            </td>
+        </tr>
+    </tbody>
+</table>
