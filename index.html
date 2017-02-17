@@ -47,7 +47,12 @@
     <script type="text/javascript" src="js/fastclick.js"></script>
     <script type="text/javascript" src="js/xui-2.3.2.min.js"></script>
     <script type="text/javascript" src="js/menu.js"></script>
-    <script type="text/javascript" src="js/controler.js"></script>
+
+    <script type="text/javascript" src="js/CAEController.js"></script>
+    <script type="text/javascript" src="js/inicioController.js"></script>
+    <script type="text/javascript" src="js/arrauduniController.js"></script>
+
+    <script type="text/javascript" src="js/indexController.js"></script>
     <script type="text/javascript" src="js/index.js"></script>
     <script type="text/javascript" src="js/CAECommon.js"></script>
     <script type="text/javascript">
@@ -70,84 +75,10 @@
 
 <div style="padding-left:16px">
     <div class="" id="div_inicio">
-        <h2>Bienvenido a CAEApp</h2>
-        <h3>Sistema para la captura de la siguiente informaci&oacute;n:</h3>
-        <ul>
-            <li>
-                Auditor&iacute;a de Unidades
-            </li>
-            <li>
-                Auditor&iacute;a de Mercanc&iacute;a
-            </li>
-        </ul>
-        <p>Por favor selecciona una opci&oacute;n del men&uacute; situado 
-            en la parte superior de la pantalla de tu dispositivo m&oacute;vil.
+        
     </div>
     <div class="hidden pure-form" id="div_arrauduni">
-        <h1>Arribos - Auditor&iacute;a de Unidades</h1>  
-        <div>
-            <label>No. de Referencia:</label>
-            <input type="text" id="txt_referencia">
-            <button class="pure-button">Buscar</button>
-        </div>
-        <table width="97%" class="pure-table pure-table-horizontal">
-            <thead>
-                <tr>
-                    <th>&nbsp;</th>
-                    <th>Dato esperado</th>
-                    <th>Coincide</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr id="tr_operador">
-                    <td>Operador</td>
-                    <td><span></span></td>
-                    <td>
-                        <input type="checkbox"><span>No</span>
-                        <input type="text">
-                    </td>
-                </tr>
-                <tr id="tr_solicitud">
-                    <td>Solicitud de Transporte</td>
-                    <td><span></span></td>
-                    <td>
-                        <input type="checkbox"><span>No</span>
-                        <input type="text">
-                    </td>
-                </tr>
-                <tr>
-                    <td>Tipo de veh&iacute;culo</td>
-                    <td><span></span></td>
-                    <td>
-                        <input type="checkbox"><span>No</span>
-                        <select id="ddlTipoVehiculo"></select>
-                    </td>
-                </tr>
-                <tr id="tr_datos_vehiculo">
-                    <td>Datos del veh&iacute;culo</td>
-                    <td><span></span></td>
-                    <td>
-                        <input type="checkbox"><span>No</span>
-                        <div>
-                            <label>Placa</label>
-                            <input type="text" id="placa">
-                        </div>
-                        <div>
-                            <label>Caja</label>
-                            <input type="text" id="caja">
-                        </div>
-                        <div>
-                            <label>Contenedor 1</label>
-                            <input type="text" id="caja1">
-                        </div>
-                        <div>
-                            <label>Contenedor 2</label>
-                            <input type="text" id="caja2">
-                        </div>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
+        
     </div>
     <div class="hidden" id="div_arraudmer">
         <h1>Arribos - Auditor&iacute;a de Mercanc&iacute;a</h1>       

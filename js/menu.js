@@ -2,6 +2,7 @@ var Menu = function() {
 	this.Init = init;
 	
 	function init(){
+		oCAEController.Create(menuAct);
 		x$('#lnkMenu').click(function() { 
 			document.getElementsByClassName("topnav")[0].classList.toggle("responsive");
 		}); 
@@ -17,12 +18,23 @@ var Menu = function() {
 					removeActive(menuSel);
 					x$('#div_' + menuSel).removeClass('hidden');
 					x$(this).addClass('active');
+					oCAEController.Create(menuSel);
 				}
-				switch (menuSel) {
-					case 'arrauduni':
-						loadTipoTransporte();
+				/*switch (menuSel) {
+					case 'inicio':
+						x$('#div_inicio').xhr('./inicio.html', {
+							async: true,
+							callback: function() { 
+								
+							},
+						});
 						break;
-				}
+					case 'arrauduni':
+						var obj = new Arrauduni();
+						obj.Init();
+						break;
+				}*/
+				
 				x$('#lnkNav').html('- ' + x$(this).html());
 				document.getElementsByClassName("topnav")[0].classList.toggle("responsive");
 			});

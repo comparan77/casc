@@ -60,4 +60,17 @@ ul.topnav li.icon {display: none;}
   display: none;
 }
 
+.inputForm 
+{
+  clear: left;
+  margin-bottom: 3px;
+}
+
+.inputForm label
+{
+  float: left;
+  display: block;
+  width: 150px;
+}
+
 /*Operation*/

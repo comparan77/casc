@@ -17,13 +17,14 @@
  * under the License.
  */
 var lstTarima = [];
+var oCAEController = new CAEController();
 var menuAct = 'inicio';
 var Tarima = function(tarima, posicion) {
     this.Tarima = tarima;
     this.Posicion = posicion;
 }
 
-var oCtrlr = new Controler();
+var oCtrlr = new Controller();
 
 var app = {
     // Application Constructor
@@ -48,7 +49,7 @@ var app = {
     // Update DOM on a Received Event
     receivedEvent: function(id) {
         try {
-            oCtrlr.InitMenu();    
+            oCtrlr.InitMenu();
         } catch (error) {
             alert(error.message);
         }
