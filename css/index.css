@@ -57,7 +57,7 @@ ul.topnav li.icon {display: none;}
 
 .hidden
 {
-  visibility: hidden;
+  display: none;
 }
 
 /*Operation*/

@@ -10,19 +10,31 @@ var Menu = function() {
 		for (var index = 0; index < opts.length; index++) {
 			var element = opts[index];
 			x$(element).find('a').click(function(){
-				clearActive();
-				x$(this).addClass('active');
-				x$('#lnkNav').html('OPT: ' + x$(this).html());
+				menuSel = String(x$(this).attr('id')).split("_")[1];
+				if(menuAct != menuSel) 
+				{
+					x$('#div_' + menuAct).addClass('hidden');
+					removeActive(menuSel);
+					x$('#div_' + menuSel).removeClass('hidden');
+					x$(this).addClass('active');
+				}
+				switch (menuSel) {
+					case 'arrauduni':
+						loadTipoTransporte();
+						break;
+				}
+				x$('#lnkNav').html('- ' + x$(this).html());
 				document.getElementsByClassName("topnav")[0].classList.toggle("responsive");
 			});
 		}	
 	}
 
-	function clearActive() {
-		var opts = x$('li').has('.optMenu');
-		for (var index = 0; index < opts.length; index++) {
-			var element = opts[index];
-			x$(element).find('a').removeClass('active');
+	function removeActive(menuSel) {
+		
+		if(menuAct != menuSel) 
+		{
+			x$('#lnk_' + menuAct).removeClass('active');
+			menuAct = menuSel;
 		}
 		x$('#lnkNav').html('');
 	}

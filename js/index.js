@@ -17,6 +17,7 @@
  * under the License.
  */
 var lstTarima = [];
+var menuAct = 'inicio';
 var Tarima = function(tarima, posicion) {
     this.Tarima = tarima;
     this.Posicion = posicion;
