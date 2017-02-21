@@ -60,17 +60,57 @@ ul.topnav li.icon {display: none;}
   display: none;
 }
 
-.inputForm 
+.divForm 
 {
   clear: left;
   margin-bottom: 3px;
 }
 
-.inputForm label
+/*Loading*/
+.loading {
+    width: 102px;
+    height: 102px;
+    background-image: url(../img/sprite-loading.png);
+    
+    -webkit-animation: play .6s steps(4) infinite;
+       -moz-animation: play .6s steps(4) infinite;
+        -ms-animation: play .6s steps(4) infinite;
+         -o-animation: play .6s steps(4) infinite;
+            animation: play .6s steps(4) infinite;
+}
+
+@-webkit-keyframes play {
+   from { background-position:    0px; }
+     to { background-position: -816px; }
+}
+
+@-moz-keyframes play {
+   from { background-position:    0px; }
+     to { background-position: -816px; }
+}
+
+@-ms-keyframes play {
+   from { background-position:    0px; }
+     to { background-position: -816px; }
+}
+
+@-o-keyframes play {
+   from { background-position:    0px; }
+     to { background-position: -816px; }
+}
+
+@keyframes play {
+   from { background-position:    0px; }
+     to { background-position: -816px; }
+}
+
+.center 
 {
-  float: left;
-  display: block;
-  width: 150px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  margin-right: -50%;
+  transform: translate(-50%, -50%)
 }
 
 /*Operation*/

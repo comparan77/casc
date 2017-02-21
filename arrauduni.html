@@ -1,15 +1,12 @@
 <h1>Arribos - Auditor&iacute;a de Unidades</h1>  
-<div class="inputForm">
-    <label>No. de Referencia:</label>
-    <input type="text" id="txt_referencia">
+<div class="divForm">
+    <input type="number" id="txt_referencia" placeholder="Referencia">
     <button class="pure-button">Buscar</button>
 </div>
 <table width="97%" class="pure-table pure-table-horizontal">
     <thead>
         <tr>
-            <th>&nbsp;</th>
-            <th>Dato esperado</th>
-            <th>Coincide</th>
+            <th colspan="3">Revisi&oacute;n de la informaci&oacute;n</th>
         </tr>
     </thead>
     <tbody>
@@ -17,48 +14,64 @@
             <td>Operador</td>
             <td><span></span></td>
             <td>
-                <input type="checkbox"><span>No</span>
-                <input type="text">
-            </td>
-        </tr>
-        <tr id="tr_solicitud">
-            <td>Solicitud de Transporte</td>
-            <td><span></span></td>
-            <td>
-                <input type="checkbox"><span>No</span>
-                <input type="text">
+                <input id="chk_operador" class="coincide_dato" type="checkbox">
+                <span id="lbl_operador" title="No Coincide">No Coincide</span>
+                <div id="pnl_operador">
+                    <input id="txt_operador" type="text" placeholder="Operador">
+                </div>
             </td>
         </tr>
         <tr>
             <td>Tipo de veh&iacute;culo</td>
             <td><span></span></td>
             <td>
-                <input type="checkbox"><span>No</span>
-                <select id="ddlTipoVehiculo"></select>
+                <input id="chk_tipovehiculo" class="coincide_dato" type="checkbox">
+                <span id="lbl_tipovehiculo" title="No Coincide">No Coincide</span>
+                <div id="pnl_tipovehiculo">
+                    <select id="ddl_tipovehiculo"></select>
+                </div>
             </td>
         </tr>
         <tr id="tr_datos_vehiculo">
             <td>Datos del veh&iacute;culo</td>
             <td><span></span></td>
             <td>
-                <input type="checkbox"><span>No</span>
-                <div class="inputForm">
-                    <label>Placa</label>
-                    <input type="text" id="placa">
+                <input id="chk_datosvehiculo" class="coincide_dato" type="checkbox">
+                <span id="lbl_datosvehiculo" title="No Coincide">No Coincide</span>
+                <div id="pnl_datosvehiculo">
+                    <div class="divForm">
+                        <input type="text" id="placa" placeholder="Placa del vehículo">
+                    </div>
+                    <div class="divForm">
+                        <input type="text" id="caja" placeholder="Placa de la Caja">
+                    </div>
+                    <div class="divForm">
+                        <input type="text" id="caja1" placeholder="No. del Contenedor 1">
+                    </div>
+                    <div class="divForm">
+                        <input type="text" id="caja2" placeholder="No. del Contenedor 2">
+                    </div>
                 </div>
-                <div class="inputForm">
-                    <label>Caja</label>
-                    <input type="text" id="caja">
+            </td>
+        </tr>
+        <tr>
+            <td>Sello</td>
+            <td><span></span></td>
+            <td>
+                <input id="chk_sello" type="checkbox" class="coincide_dato">
+                <span id="lbl_sello" title="No Coincide">No Coincide</span>
+                <div id="pnl_sello">
+                    <div class="divForm">
+                        <input type="text" id="sello" placeholder="Sello">
+                    </div>
                 </div>
-                <div class="inputForm">
-                    <label>Contenedor 1</label>
-                    <input type="text" id="caja1">
-                </div>
-                <div class="inputForm">
-                    <label>Contenedor 2</label>
-                    <input type="text" id="caja2">
+                <div>
+                    <input type="checkbox"><span>Sello roto</span>
                 </div>
             </td>
         </tr>
     </tbody>
 </table>
+<div class="divForm">
+    <button class="pure-button pure-button-primary">Guardar</button>
+</div>

@@ -20,21 +20,6 @@ var Menu = function() {
 					x$(this).addClass('active');
 					oCAEController.Create(menuSel);
 				}
-				/*switch (menuSel) {
-					case 'inicio':
-						x$('#div_inicio').xhr('./inicio.html', {
-							async: true,
-							callback: function() { 
-								
-							},
-						});
-						break;
-					case 'arrauduni':
-						var obj = new Arrauduni();
-						obj.Init();
-						break;
-				}*/
-				
 				x$('#lnkNav').html('- ' + x$(this).html());
 				document.getElementsByClassName("topnav")[0].classList.toggle("responsive");
 			});
