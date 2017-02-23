@@ -24,7 +24,7 @@ var Tarima = function(tarima, posicion) {
     this.Posicion = posicion;
 }
 
-var oCtrlr = new Controller();
+var oIndexCtrl = new IndexController();
 
 var app = {
     // Application Constructor
@@ -49,7 +49,8 @@ var app = {
     // Update DOM on a Received Event
     receivedEvent: function(id) {
         try {
-            oCtrlr.InitMenu();
+            //oCtrlr.InitMenu();
+            oCAEController.Create('login');
         } catch (error) {
             alert(error.message);
         }

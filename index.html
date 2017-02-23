@@ -48,7 +48,12 @@
     <script type="text/javascript" src="js/xui-2.3.2.min.js"></script>
     <script type="text/javascript" src="js/menu.js"></script>
 
+    <script type="text/javascript" src="js/SHA512.js"></script>
+
+    <script type="text/javascript" src="js/catalogosModel.js"></script>
+
     <script type="text/javascript" src="js/CAEController.js"></script>
+    <script type="text/javascript" src="js/loginController.js"></script>
     <script type="text/javascript" src="js/inicioController.js"></script>
     <script type="text/javascript" src="js/arrauduniController.js"></script>
     <script type="text/javascript" src="js/arraudmerController.js"></script>
@@ -63,8 +68,10 @@
 </head>
 
 <body>
-    
-<ul id="menu" class="topnav">
+
+<div id="div_login"></div>
+
+<ul id="menu" class="topnav hidden">
   <li><a id="lnkNav" href="#home">- Inicio</a></li>
   <li class="optMenu"><a id="lnk_inicio" class="active" href="#inicio">Inicio</a></li>
   <li class="optMenu"><a id="lnk_arrauduni" href="#arrauduni">Arribos - Aud. Unidades</a></li>
@@ -77,7 +84,7 @@
 
 <div style="padding-left:16px">
     <div id="divLoading" class="loading center hidden"></div>
-    <div class="" id="div_inicio"></div>
+    <div class="hidden" id="div_inicio"></div>
     <div class="hidden pure-form" id="div_arrauduni"></div>
     <div class="hidden" id="div_arraudmer"></div>
     <div class="hidden" id="div_embauduni"></div>      

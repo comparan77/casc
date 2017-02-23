@@ -26,7 +26,7 @@ var Arrauduni = function() {
         try {
                 if(arrTipoTransporte.length == 0) {
                     Common.loadAjax(true);
-                    Common.loadTipoTransporte(function(data) {
+                    CatalogosModel.TipoTransporteGetLst(function(data) {
                         Common.loadAjax(false);
                         arrTipoTransporte = data;
                         initControls();

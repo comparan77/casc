@@ -3,6 +3,8 @@ var Menu = function() {
 	
 	function init(){
 		oCAEController.Create(menuAct);
+		x$('#menu').removeClass('hidden');
+		x$('#div_' + menuAct).removeClass('hidden');
 		x$('#lnkMenu').click(function() { 
 			document.getElementsByClassName("topnav")[0].classList.toggle("responsive");
 		}); 

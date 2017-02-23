@@ -4,7 +4,9 @@ var CAEController = function() {
     function create(type){
         var obj;
         try {
-            if (type === "inicio") {
+            if (type === "login") {
+                obj = new Login();
+            } else if (type === "inicio") {
                 obj = new Inicio();
             } else if (type === "arrauduni") {
                 obj = new Arrauduni();

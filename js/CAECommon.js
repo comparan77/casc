@@ -34,21 +34,6 @@ Common.loadAjax = function(state) {
     state ? x$('#divLoading').removeClass('hidden') : x$('#divLoading').addClass('hidden');
 }
 
-Common.loadTipoTransporte = function (callback) {
-    var url = 'http://cascserver.ddns.net:8083/handlers/catalog.ashx?catalogo=transporte_tipo';
-    try {
-        var opts = '';
-        Common.fetchJSONFile(
-            url, 
-            function(data) {
-                callback(data);
-            }, 
-            'GET');
-    } catch (error) {
-        alert(error);
-    }
-}
-
 Common.fillDropDownList = function (ddl, data) {
     var opts = '';
     x$('#' + ddl).html('');
@@ -56,21 +41,4 @@ Common.fillDropDownList = function (ddl, data) {
         opts+= '<option value=' + data[x].Id + '>' + data[x].Nombre + '</option>';
     }
     x$('#' + ddl).html('inner',opts);
-}
-
-Common.fillCondUnidades = function(id_cliente, es_entrada, es_salida, callback) {
-    var url = 'http://cascserver.ddns.net:8083/handlers/Operation.ashx?op=transCond&opt=condCli';
-    url += '&id_cliente=' + id_cliente + '&es_entrada=' + es_entrada + '&es_salida=' + es_salida;
-    try {
-        var opts = '';
-        Common.fetchJSONFile(
-            url, 
-            function(data) {
-                callback(data);
-            },
-            'POST'
-            );
-    } catch (error) {
-        alert('fillCondUnidades' + error);
-    }
 }

@@ -1,4 +1,4 @@
-var Controller = function() {
+var IndexController = function() {
 	
 	this.InitMenu = initMenu;
 	

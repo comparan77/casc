@@ -1,4 +1,4 @@
-body {margin:0;}
+body {margin:0; background-color: #f9f9f9}
 ul.topnav {
   list-style-type: none;
   margin: 0;
@@ -72,7 +72,7 @@ ul.topnav li.icon {display: none;}
     height: 102px;
     background-image: url(../img/sprite-loading.png);
     
-    -webkit-animation: play .6s steps(4) infinite;
+    -webkit-animation: play .6s steps(8) infinite;
        -moz-animation: play .6s steps(4) infinite;
         -ms-animation: play .6s steps(4) infinite;
          -o-animation: play .6s steps(4) infinite;
@@ -104,13 +104,11 @@ ul.topnav li.icon {display: none;}
      to { background-position: -816px; }
 }
 
-.center 
-{
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  margin-right: -50%;
-  transform: translate(-50%, -50%)
+@media (max-width: 1000px) {
+.center-inner{left:25%;top:25%;position:absolute;width:50%;height:300px;text-align:center;max-width:500px;max-height:500px;}
 }
+@media (min-width: 1000px) {
+.center{left:50%;top:25%;position:absolute;}
+.center-inner{width:500px;height:100%;margin-left:-250px;height:300px;text-align:center;max-width:500px;max-height:500px;}}
 
 /*Operation*/
