@@ -62,11 +62,6 @@ Common.getPhoto = function (source) {
 function onSuccess(imageData) {
     document.getElementById("foto").style.backgroundImage="url('data:image/jpeg;base64,"+imageData+"')";
     document.getElementById("foto").style.backgroundSize="100% 100%";
-    //document.getElementById("foto").style.backgroundRepeat="no-repeat";
-    //document.getElementById("foto").style.backgroundSize="contain";
-    //document.getElementById("foto").innerHTML=imageData;
-    //x$('#' + element).attr('backgroundImage', "url(data:image/jpeg;base64," + imageData + ")");
-    //x$('#' + element).attr('backgroundSize', '100% 100%');
 }
 
 function onPhotoURISuccess(imageURI) {
