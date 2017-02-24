@@ -20,6 +20,7 @@ var Arrauduni = function() {
         evaluaDatosRequeridos(arrTipoTransporte[0].Id);
         ddlTipoVehiculo_Change();
         checkCoincide_Change();
+        btn_capturePhoto_Click();
     }
 
     function init() {
@@ -61,6 +62,16 @@ var Arrauduni = function() {
     function ddlTipoVehiculo_Change() {
         x$('#' + ddlTipoVehiculo).on('change', function() {
             evaluaDatosRequeridos(this.value);
+        });
+    }
+
+    function btn_capturePhoto_Click() {
+        x$('#btn_capturePhoto').on('click', function() {
+            try {
+                Common.capturePhoto();    
+            } catch (error) {
+                alert(error);
+            }
         });
     }
 }

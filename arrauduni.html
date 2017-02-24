@@ -1,7 +1,10 @@
 <h1>Arribos - Auditor&iacute;a de Unidades</h1>  
 <div class="divForm">
     <input type="number" id="txt_referencia" placeholder="Referencia">
-    <button class="pure-button">Buscar</button>
+    <button class="pure-button">
+        <i class="sprite icon Search"></i>
+        Buscar
+    </button>
 </div>
 <table width="97%" class="pure-table pure-table-horizontal">
     <thead>
@@ -38,17 +41,17 @@
             <td>
                 <input id="chk_datosvehiculo" class="coincide_dato" type="checkbox">
                 <span id="lbl_datosvehiculo" title="No Coincide">No Coincide</span>
-                <div id="pnl_datosvehiculo">
-                    <div class="divForm">
+                <div class="pure-form pure-form-aligned" id="pnl_datosvehiculo">
+                    <div class="pure-control-group">
                         <input type="text" id="placa" placeholder="Placa del vehículo">
                     </div>
-                    <div class="divForm">
+                    <div class="pure-control-group">
                         <input type="text" id="caja" placeholder="Placa de la Caja">
                     </div>
-                    <div class="divForm">
+                    <div class="pure-control-group">
                         <input type="text" id="caja1" placeholder="No. del Contenedor 1">
                     </div>
-                    <div class="divForm">
+                    <div class="pure-control-group">
                         <input type="text" id="caja2" placeholder="No. del Contenedor 2">
                     </div>
                 </div>
@@ -60,8 +63,8 @@
             <td>
                 <input id="chk_sello" type="checkbox" class="coincide_dato">
                 <span id="lbl_sello" title="No Coincide">No Coincide</span>
-                <div id="pnl_sello">
-                    <div class="divForm">
+                <div class="pure-form pure-form-aligned" id="pnl_sello">
+                    <div class="pure-control-group">
                         <input type="text" id="sello" placeholder="Sello">
                     </div>
                 </div>
@@ -72,6 +75,15 @@
         </tr>
     </tbody>
 </table>
-<div class="divForm">
-    <button class="pure-button pure-button-primary">Guardar</button>
+<div id="foto"></div>
+<div class="pure-form pure-form-aligned">
+    <div class="pure-controls">
+        <button id="btn_capturePhoto" class="pure-button">
+            <i class="sprite icon Camera"></i>
+            &nbsp;Evidencias
+        </button>
+    </div>
+    <div class="pure-controls">
+        <button class="pure-button pure-button-primary">Guardar</button>
+    </div>
 </div>
