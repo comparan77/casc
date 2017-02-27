@@ -112,3 +112,20 @@ ul.topnav li.icon {display: none;}
 .center-inner{width:500px;height:100%;margin-left:-250px;height:300px;text-align:center;max-width:500px;max-height:500px;}}
 
 /*Operation*/
+
+/*Evidencias fotograficas*/
+#evidencias ul
+{
+  list-style-type: none;
+}
+#evidencias ul li
+{
+  padding: 1%;
+  float: left;
+}
+div.photo
+{
+  width: 100px;
+  height: 100px;
+  background-size: 100% 100%;
+}

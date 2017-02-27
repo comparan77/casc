@@ -3,6 +3,7 @@ var Arrauduni = function() {
     this.Init = init;
     var ddlTipoVehiculo = 'ddl_tipovehiculo';
     var divArrauduni = 'div_arrauduni';
+    var indPhoto = 1;
 
     function evaluaDatosRequeridos(Id) {
         for(var i = 0; i < arrTipoTransporte.length; i++) {
@@ -21,6 +22,21 @@ var Arrauduni = function() {
         ddlTipoVehiculo_Change();
         checkCoincide_Change();
         btn_capturePhoto_Click();
+    }
+
+    function photoReady(imageData) {
+        //document.getElementById("foto").style.backgroundImage="url('data:image/jpeg;base64,"+imageData+"')";
+        //document.getElementById("foto").style.backgroundSize="100% 100%";
+        
+        //x$('#foto').attr('id', 'foto' + indPhoto);
+        x$('#ul_evidencias').html('top', '<li><div id="photo_' + indPhoto + '"></div></li>');
+        /*x$('#photo_' + indPhoto).setStyle('width', '100px');
+        x$('#photo_' + indPhoto).setStyle('height', '100px');
+        x$('#photo_' + indPhoto).setStyle('background-size', '100% 100%');*/
+        x$('#photo_' + indPhoto).addClass('photo');
+        x$('#photo_' + indPhoto).setStyle('background-image', "url('data:image/jpeg;base64," + imageData + "')");
+        indPhoto++;
+        //alert(x$('#ul_evidencias').html());
     }
 
     function init() {
@@ -68,7 +84,7 @@ var Arrauduni = function() {
     function btn_capturePhoto_Click() {
         x$('#btn_capturePhoto').on('click', function() {
             try {
-                Common.capturePhoto();    
+                Common.capturePhoto(photoReady);  
             } catch (error) {
                 alert(error);
             }
