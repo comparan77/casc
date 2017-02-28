@@ -72,3 +72,36 @@ function onPhotoURISuccess(imageURI) {
 function onFail(message) {
     alert('Failed because: ' + message);
 }
+
+/**Notificaciones */
+Common.notificationAlert = function (msg, title, buttonName, alertDismissed) {
+    navigator.notification.alert(
+        msg,            // message
+        alertDismissed, // callback
+        title,          // title
+        buttonName      // buttonName
+    );
+} 
+
+Common.notificationConfirm = function (msg, title, buttonName, onConfirm) {
+    navigator.notification.confirm(
+        msg,                    // message
+        onConfirm,              // callback return buttonindex function onConfirm(buttonindex)
+        title,                  // title
+        buttonName              // buttonName ['Reiniciar','Salir']
+    );
+} 
+
+Common.notificationPrompt = function (msg, title, buttonName, defaultText, onPrompt) {
+    navigator.notification.prompt(
+        msg,            // message
+        onPrompt,       // callback to invoke return buttonindex like notificationConfirm
+        title,          // title
+        buttonName,     // buttonLabels
+        defaultText     // defaultText
+    );
+} 
+
+Common.notificationBeep = function () {
+    navigator.notification.beep(2);
+}

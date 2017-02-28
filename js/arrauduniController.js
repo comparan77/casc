@@ -22,21 +22,13 @@ var Arrauduni = function() {
         ddlTipoVehiculo_Change();
         checkCoincide_Change();
         btn_capturePhoto_Click();
+        btn_save_Click();
     }
 
     function photoReady(imageData) {
-        //document.getElementById("foto").style.backgroundImage="url('data:image/jpeg;base64,"+imageData+"')";
-        //document.getElementById("foto").style.backgroundSize="100% 100%";
-        
-        //x$('#foto').attr('id', 'foto' + indPhoto);
-        x$('#ul_evidencias').html('top', '<li><div id="photo_' + indPhoto + '"></div></li>');
-        /*x$('#photo_' + indPhoto).setStyle('width', '100px');
-        x$('#photo_' + indPhoto).setStyle('height', '100px');
-        x$('#photo_' + indPhoto).setStyle('background-size', '100% 100%');*/
-        x$('#photo_' + indPhoto).addClass('photo');
-        x$('#photo_' + indPhoto).setStyle('background-image', "url('data:image/jpeg;base64," + imageData + "')");
+        var img = '<img class="pure-img" src="data:image/jpeg;base64,' + imageData + '" >';
+        x$('#evidencias').html('top', '<div id="photo_' + indPhoto + '" class="pure-u-1-2"><div class="l-box">' + img + '</div></div>');
         indPhoto++;
-        //alert(x$('#ul_evidencias').html());
     }
 
     function init() {
@@ -88,6 +80,12 @@ var Arrauduni = function() {
             } catch (error) {
                 alert(error);
             }
+        });
+    }
+
+    function btn_save_Click() {
+        x$('#btn_save').on('click', function() {
+            
         });
     }
 }
