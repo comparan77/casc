@@ -8,10 +8,10 @@ var Arrauduni = function() {
     function evaluaDatosRequeridos(Id) {
         for(var i = 0; i < arrTipoTransporte.length; i++) {
             if(arrTipoTransporte[i].Id == Id) {
-                x$('#placa').attr('value', arrTipoTransporte[i].Requiere_placa ? '' : 'N.A.');
-                x$('#caja').attr('value', arrTipoTransporte[i].Requiere_caja ? '' : 'N.A.');
-                x$('#caja1').attr('value', arrTipoTransporte[i].Requiere_caja1 ? '' : 'N.A.');
-                x$('#caja2').attr('value', arrTipoTransporte[i].Requiere_caja2 ? '' : 'N.A.');
+                x$('#txt_placa').attr('value', arrTipoTransporte[i].Requiere_placa ? '' : 'N.A.');
+                x$('#txt_caja').attr('value', arrTipoTransporte[i].Requiere_caja ? '' : 'N.A.');
+                x$('#txt_caja1').attr('value', arrTipoTransporte[i].Requiere_caja1 ? '' : 'N.A.');
+                x$('#txt_caja2').attr('value', arrTipoTransporte[i].Requiere_caja2 ? '' : 'N.A.');
             }
         }
     }
@@ -23,12 +23,28 @@ var Arrauduni = function() {
         checkCoincide_Change();
         btn_capturePhoto_Click();
         btn_save_Click();
+        btn_search_Click();
     }
 
     function photoReady(imageData) {
         var img = '<img class="pure-img" src="data:image/jpeg;base64,' + imageData + '" >';
         x$('#evidencias').html('top', '<div id="photo_' + indPhoto + '" class="pure-u-1-2"><div class="l-box">' + img + '</div></div>');
         indPhoto++;
+    }
+
+    function fillForm(data) {
+        x$('#txt_operador').attr('placeholder', data.Operador);
+        document.getElementById('ddl_tipovehiculo').value = data.Id_transporte_tipo;
+        x$('#ddl_tipovehiculo').fire('change');
+        if(data.Placa!='N.A.')
+            x$('#txt_placa').attr('placeholder', data.Placa);
+        if(data.Caja!='N.A.')
+            x$('#txt_caja').attr('placeholder', data.Caja);
+        if(data.Caja1!='N.A.')
+            x$('#txt_caja1').attr('placeholder', data.Caja1);
+        if(data.Caja2!='N.A.')
+            x$('#txt_Caja2').attr('placeholder', data.Caja2);
+        x$('#txt_sello').attr('placeholder', data.Sello);
     }
 
     function init() {
@@ -77,6 +93,26 @@ var Arrauduni = function() {
         x$('#btn_capturePhoto').on('click', function() {
             try {
                 Common.capturePhoto(photoReady);  
+            } catch (error) {
+                alert(error);
+            }
+        });
+    }
+
+    function btn_search_Click() {
+        x$('#btn_search').on('click', function() {
+            Common.loadAjax(true);
+            try {
+                var referencia = x$('#txt_referencia').attr('value');
+                OperationModel.precargaGetByRef(referencia, function(data) {
+                    Common.loadAjax(false);
+                    if(typeof(data)!='object') {
+                        Common.notificationAlert(data, 'Alerta', 'Ok')
+                    }
+                    else {
+                        fillForm(data);
+                    }
+                });
             } catch (error) {
                 alert(error);
             }
