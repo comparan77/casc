@@ -16,6 +16,13 @@ var Arrauduni = function() {
         }
     }
 
+    function findTransporteById(Id) {
+        for(var i = 0; i < arrTipoTransporte.length; i++) {
+            if(arrTipoTransporte[i].Id == Id) 
+                return arrTipoTransporte[i].Nombre;
+        }
+    }
+
     function initControls() {
         Common.fillDropDownList(ddlTipoVehiculo, arrTipoTransporte);
         evaluaDatosRequeridos(arrTipoTransporte[0].Id);
@@ -33,7 +40,8 @@ var Arrauduni = function() {
     }
 
     function fillForm(data) {
-        x$('#txt_operador').attr('placeholder', data.Operador);
+        x$('#txt_operador_db').attr('value', data.Operador).removeClass('hidden');
+        x$('#txt_tipovehiculo_db').attr('value', findTransporteById(data.Id_transporte_tipo)).removeClass('hidden');
         document.getElementById('ddl_tipovehiculo').value = data.Id_transporte_tipo;
         x$('#ddl_tipovehiculo').fire('change');
         if(data.Placa!='N.A.')
@@ -44,7 +52,15 @@ var Arrauduni = function() {
             x$('#txt_caja1').attr('placeholder', data.Caja1);
         if(data.Caja2!='N.A.')
             x$('#txt_Caja2').attr('placeholder', data.Caja2);
-        x$('#txt_sello').attr('placeholder', data.Sello);
+        x$('#txt_sello_db').attr('value', data.Sello).removeClass('hidden');
+    }
+
+    function clearFormValues() {
+        x$('#txt_referencia').attr('value', '');
+        x$('#txt_operador_db').attr('value', '').addClass('hidden');
+        x$('#txt_operador').attr('value', '')
+        x$('#txt_tipovehiculo_db').attr('value', '').addClass('hidden');
+        x$('#txt_sello_db').attr('value', '').addClass('hidden');
     }
 
     function init() {
@@ -102,8 +118,12 @@ var Arrauduni = function() {
     function btn_search_Click() {
         x$('#btn_search').on('click', function() {
             Common.loadAjax(true);
+            clearFormValues();
             try {
-                var referencia = x$('#txt_referencia').attr('value');
+                var referencia = String(x$('#txt_referencia').attr('value'));
+                var nopedimento = /(\d{2})(\d{4})(\d{7})/;
+                referencia = referencia.replace(nopedimento, "$1-$2-$3");
+                referencia = '47-3061-7002226';
                 OperationModel.precargaGetByRef(referencia, function(data) {
                     Common.loadAjax(false);
                     if(typeof(data)!='object') {
