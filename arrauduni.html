@@ -5,6 +5,8 @@
         <i class="sprite icon Search"></i>
         Buscar
     </button>
+    <input type="hidden" id="h_id_entrada_precarga">
+    <input type="hidden" id="h_referencia">
 </div>
 
 <form class="pure-form pure-form-aligned">
@@ -26,23 +28,28 @@
             <div id="pnl_tipovehiculo">
                 <select id="ddl_tipovehiculo"></select>
             </div>
+            <input id="txt_tipovehiculo" style="display: none">
         </div>
         <legend>Placas del Veh&iacute;culo</legend>
         <div class="pure-control-group">
             <input id="chk_datosvehiculo" class="coincide_dato" type="checkbox">
                 <span id="lbl_datosvehiculo" title="No Coincide">No Coincide</span>
                 <div class="pure-form pure-form-aligned" id="pnl_datosvehiculo">
-                    <div class="pure-control-group">
-                        <input type="text" id="txt_placa" placeholder="Placa del vehículo">
+                    <div class="pure-form">
+                        <input type="text" id="txt_placa_db" readonly> 
+                        <input class="datoVehiculo" type="text" id="txt_placa" placeholder="Placa del vehículo">
                     </div>
-                    <div class="pure-control-group">
-                        <input type="text" id="txt_caja" placeholder="Placa de la Caja">
+                    <div class="pure-form">
+                        <input type="text" id="txt_caja_db" readonly>
+                        <input class="datoVehiculo" type="text" id="txt_caja" placeholder="Placa de la Caja">
                     </div>
-                    <div class="pure-control-group">
-                        <input type="text" id="txt_caja1" placeholder="No. del Contenedor 1">
+                    <div class="pure-form">
+                        <input type="text" id="txt_caja1_db" readonly>
+                        <input class="datoVehiculo" type="text" id="txt_caja1" placeholder="No. del Contenedor 1">
                     </div>
-                    <div class="pure-control-group">
-                        <input type="text" id="txt_caja2" placeholder="No. del Contenedor 2">
+                    <div class="pure-form">
+                        <input type="text" id="txt_caja2_db" readonly>
+                        <input class="datoVehiculo" type="text" id="txt_caja2" placeholder="No. del Contenedor 2">
                     </div>
                 </div>
         </div>
@@ -57,7 +64,7 @@
                 </div>
             </div>
             <div>
-                <input type="checkbox"><span>Sello roto</span>
+                <input id="chk_sello_roto" type="checkbox"><span>Sello roto</span>
             </div>
         </div>
     </fieldset>

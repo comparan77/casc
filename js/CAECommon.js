@@ -1,6 +1,6 @@
 function Common() {}
 
-Common.fetchJSONFile = function (path, callback, type) {
+Common.fetchJSONFile = function (path, callback, type, jsonData) {
     var httpRequest = new XMLHttpRequest();
     httpRequest.open(type, path, true);
     httpRequest.setRequestHeader("Content-type", "application/json");
@@ -12,10 +12,19 @@ Common.fetchJSONFile = function (path, callback, type) {
             }
         }
     };
-
-    httpRequest.send();
+    httpRequest.send(jsonData);
 }
 
+/**Cambia el estado de un boton mientras se ejecutan las llamadas asincronas */
+Common.setEstatusBtn = function(element, text, disabled) {
+    if(disabled)
+        x$('#' + element).html(text + '...').attr('disabled','disabled');
+    else {
+        x$('#' + element).html(text);
+        document.getElementById(element).removeAttribute('disabled');
+    }
+}
+ 
 
 /**Devuelve el valor buscado de un json por ejemplo */
 Common.getValueByKey = function (key, data) {
@@ -30,10 +39,12 @@ Common.getValueByKey = function (key, data) {
     return -1;
 }
 
+/**Gif para ajax loading */
 Common.loadAjax = function(state) {
     state ? x$('#divLoading').removeClass('hidden') : x$('#divLoading').addClass('hidden');
 }
 
+/**Llena un select  */
 Common.fillDropDownList = function (ddl, data) {
     var opts = '';
     x$('#' + ddl).html('');

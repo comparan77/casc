@@ -7,8 +7,19 @@ var Login = function() {
 
     function validaCredenciales(email, pass) {
         try {
-            x$('#div_login').addClass('hidden');
-            oIndexCtrl.InitMenu();    
+            oUsuario = new BeanUsuario(email,pass);
+            CatalogosModel.UsuarioCredencialesValidas(oUsuario, function (data) {
+                if(data.Id > 0) {
+                    oUsuario.Id = data.Id;
+                    oUsuario.Nombre = data.Nombre;
+                    x$('#div_login').addClass('hidden');
+                    oIndexCtrl.InitMenu();
+                }
+                else {
+                    Common.notificationAlert('Las credenciales no son válidas', 'Login', 'Ok');
+                    Common.setEstatusBtn('access', 'Login', false);
+                }
+            });
         } catch (error) {
             alert(error);
         }
@@ -21,8 +32,11 @@ var Login = function() {
     function btn_click() {
         x$('#access').on('click', function() {
             var passValue = x$("#txt_password").attr('value');
+            passValue = 'ids150225_'
             var pass = SHA512(passValue);//llamada al archivo js 
-            var email = x$("#txt_email").attr('value'); 
+            var email = String(x$("#txt_email").attr('value'));
+            Common.setEstatusBtn('access', 'Validando', true);
+            email = 'gcruz@casc.com.mx';
             validaCredenciales(email, pass);
         });
     }

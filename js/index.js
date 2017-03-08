@@ -16,7 +16,10 @@
  * specific language governing permissions and limitations
  * under the License.
  */
-var lstTarima = [];
+
+//var lstTarima = [];
+var urlHandler = 'http://192.168.1.66/'; //'http://cascserver.ddns.net:8083/';
+var oUsuario;
 var oCAEController = new CAEController();
 var menuAct = 'inicio';
 var Tarima = function(tarima, posicion) {
