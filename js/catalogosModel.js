@@ -1,15 +1,5 @@
-var BeanUsuario = function(email, contrasenia) {
-    this.Id = 0;
-    this.Nombre = '';
-    this.Clave = '';
-    this.Email = email;
-    this.Contrasenia = contrasenia;
-    this.Id_bodega = 0;
-    this.Id_rol = 0;
-    this.IsActive = 0;
-}
-
 function CatalogosModel() {}
+
 /**Usuarios */
 CatalogosModel.UsuarioCredencialesValidas = function (obj, callback) {
     var url = urlHandler + 'handlers/CAEApp.ashx?op=usuario&opt=CredencialesValidas';
@@ -58,5 +48,20 @@ CatalogosModel.TransporteCondicionesGetLst = function(id_cliente, es_entrada, es
             );
     } catch (error) {
         alert('fillCondUnidades' + error);
+    }
+}
+
+/**Vigilantes */
+CatalogosModel.vigilanteGetLst = function (callback) {
+    var url = urlHandler + 'handlers/catalog.ashx?catalogo=vigilante&key=' + oUsuario.Id_bodega;
+    try {
+        Common.fetchJSONFile(
+            url, 
+            function(data) {
+                callback(data);
+            }, 
+            'GET');
+    } catch (error) {
+        alert(error);
     }
 }

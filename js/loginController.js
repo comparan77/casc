@@ -1,3 +1,14 @@
+var BeanUsuario = function(email, contrasenia) {
+    this.Id = 0;
+    this.Nombre = '';
+    this.Clave = '';
+    this.Email = email;
+    this.Contrasenia = contrasenia;
+    this.Id_bodega = 0;
+    this.Id_rol = 0;
+    this.IsActive = 0;
+}
+
 var Login = function() {
     this.Init = init;
 
@@ -12,6 +23,7 @@ var Login = function() {
                 if(data.Id > 0) {
                     oUsuario.Id = data.Id;
                     oUsuario.Nombre = data.Nombre;
+                    oUsuario.Id_bodega = data.Id_bodega;
                     x$('#div_login').addClass('hidden');
                     oIndexCtrl.InitMenu();
                 }

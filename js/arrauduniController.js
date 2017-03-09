@@ -1,4 +1,5 @@
-var BeanEntrada_aud_uni = function (id_entrada_precarga, id_transporte_tipo, referencia, operador, placa, caja, caja1, caja2, sello, sello_roto, acta_informativa, lst_files) {
+var BeanEntrada_aud_uni = function (id_entrada_precarga, id_transporte_tipo, referencia, operador, placa, caja, caja1, caja2, sello, sello_roto, acta_informativa, vigilante, lst_files) {
+    this.PUsuario = oUsuario;
     this.Id = 0;
     this.Id_entrada_pre_carga = id_entrada_precarga;
     this.Id_transporte_tipo = id_transporte_tipo;
@@ -11,6 +12,8 @@ var BeanEntrada_aud_uni = function (id_entrada_precarga, id_transporte_tipo, ref
     this.Sello = sello;
     this.Sello_roto = sello_roto;
     this.Acta_informativa = acta_informativa;
+    this.Fecha = '01/01/0001';
+    this.Vigilante = vigilante;
     this.PLstEntAudUniFiles = lst_files;
 }
 
@@ -22,9 +25,12 @@ var BeanEntrada_aud_uni_files = function(path) {
 
 var arrTipoTransporte = [];
 var arrLstAudUniFiles = [];
+var arrVigilantes = [];
+
 var Arrauduni = function() {
     this.Init = init;
     var ddlTipoVehiculo = 'ddl_tipovehiculo';
+    var ddlVigilante = 'ddl_vigilante';
     var divArrauduni = 'div_arrauduni';
     var indPhoto = 1;
 
@@ -55,6 +61,7 @@ var Arrauduni = function() {
 
     function initControls() {
         Common.fillDropDownList(ddlTipoVehiculo, arrTipoTransporte);
+        Common.fillDropDownList(ddlVigilante, arrVigilantes);
         evaluaDatosRequeridos(arrTipoTransporte[0].Id);
         ddlTipoVehiculo_Change();
         checkCoincide_Change();
@@ -109,12 +116,23 @@ var Arrauduni = function() {
 
     function init() {
         try {
-                if(arrTipoTransporte.length == 0) {
+                var requestCallback = new MyRequestsCompleted({
+                    numRequest: 2,
+                    singleCallback: function(){
+                        Common.loadAjax(false);
+                        initControls();
+                    }
+                });
+                
+                if(arrTipoTransporte.length == 0 || arrVigilantes == 0) {
                     Common.loadAjax(true);
                     CatalogosModel.TipoTransporteGetLst(function(data) {
-                        Common.loadAjax(false);
                         arrTipoTransporte = data;
-                        initControls();
+                        requestCallback.requestComplete(true);
+                    });
+                    CatalogosModel.vigilanteGetLst(function(data) {
+                        arrVigilantes = data;
+                        requestCallback.requestComplete(true);
                     });
                 }
                 else {
@@ -223,6 +241,7 @@ var Arrauduni = function() {
         x$('#btn_save').on('click', function() {
              Common.setEstatusBtn('btn_save', 'Guardando', true);
             try {
+                var optionVigilante = document.getElementById('ddl_vigilante');
                 var oBEAU = new BeanEntrada_aud_uni(
                     x$('#h_id_entrada_precarga').attr('value') * 1,
                     x$('#txt_tipovehiculo').attr('value') * 1,
@@ -235,6 +254,7 @@ var Arrauduni = function() {
                     String(x$('#txt_sello').attr('value')),
                     document.getElementById("chk_sello_roto").checked,
                     document.getElementById("txt_relato").value,
+                    optionVigilante.options[optionVigilante.selectedIndex].text,
                     arrLstAudUniFiles
                 );
                 OperationModel.entradaAudUniAdd(oBEAU, function(data) {
