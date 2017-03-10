@@ -271,5 +271,33 @@ var Arrauduni = function() {
 }
 
 
+var options = {
+    title: 'titulo',
+    documentView : {
+        closeLabel : 'cerrar'
+    },
+    navigationView : {
+        closeLabel : 'navegar'
+    },
+    email : {
+        enabled : false
+    },
+    print : {
+        enabled : true
+    },
+    openWith : {
+        enabled : true
+    },
+    bookmarks : {
+        enabled : false
+    },
+    search : {
+        enabled : false
+    },
+    autoClose: {
+        onPause : true
+    }
+}
+
 
 
