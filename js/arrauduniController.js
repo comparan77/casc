@@ -3,6 +3,7 @@ var BeanEntrada_aud_uni = function (id_entrada_precarga, id_transporte_tipo, ref
     this.Id = 0;
     this.Id_entrada_pre_carga = id_entrada_precarga;
     this.Id_transporte_tipo = id_transporte_tipo;
+    this.Informa = oUsuario.Nombre;
     this.Referencia = referencia;
     this.Operador = operador;
     this.Placa = placa;
@@ -260,6 +261,7 @@ var Arrauduni = function() {
                 OperationModel.entradaAudUniAdd(oBEAU, function(data) {
                     alert(data);
                     Common.setEstatusBtn('btn_save', 'Guardar', false);
+                    window.open(urlHandler + 'rpt/entradas_aud/' + oBEAU.Referencia + '/casc028.pdf', '_system', 'location=yes');
                 });
             } catch (error) {
                 alert(error);
@@ -267,3 +269,7 @@ var Arrauduni = function() {
         });
     }
 }
+
+
+
+
