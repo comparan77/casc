@@ -149,3 +149,8 @@ Common.notificationPrompt = function (msg, title, buttonName, defaultText, onPro
 Common.notificationBeep = function () {
     navigator.notification.beep(2);
 }
+
+/**Notificaciones CRUD */
+Common.notificaRegExitoso = function() {
+    Common.notificationAlert('Registro Exitoso', 'Registro de Información', 'Ok');
+}

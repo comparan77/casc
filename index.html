@@ -41,7 +41,7 @@
     <link rel="stylesheet" type="text/css" href="css/index.css" />
     <link rel="stylesheet" type="text/css" href="css/purecss.css" />
     <link rel="stylesheet" type="text/css" href="css/iconos_gap.css" />
-    <title>Hello World</title>
+    <title></title>
     
     <script type="text/javascript" src="cordova.js"></script>
     <!--<script type="text/javascript" src="js/iscroll.js"></script>-->
@@ -58,6 +58,7 @@
     <script type="text/javascript" src="js/arrauduniController.js"></script>
     <script type="text/javascript" src="js/arraudmerController.js"></script>
     <script type="text/javascript" src="js/embauduniController.js"></script>
+    <script type="text/javascript" src="js/chartController.js"></script>
     <script type="text/javascript" src="js/indexController.js"></script>
     <script type="text/javascript" src="js/index.js"></script>
     <script type="text/javascript" src="js/CAECommon.js"></script>
@@ -76,6 +77,7 @@
   <li class="optMenu"><a id="lnk_arrauduni" href="#arrauduni">Arribos - Aud. Unidades</a></li>
   <li class="optMenu"><a id="lnk_arraudmer" href="#arraudmer">Arribos - Aud. Mercanc&iacute;a</a></li>
   <li class="optMenu"><a id="lnk_embauduni" href="#embauduni">Embarques - Aud. Unidades</a></li>
+  <li class="optMenu"><a id="lnk_chart" href="#chart">Reportes</a></li>
   <li class="icon">
     <a id="lnkMenu" href="#" style="font-size:15px;"><span class="sprite Menu icon"></span></a>
   </li>
@@ -86,9 +88,11 @@
     <div class="hidden" id="div_inicio"></div>
     <div class="hidden pure-form" id="div_arrauduni"></div>
     <div class="hidden" id="div_arraudmer"></div>
-    <div class="hidden" id="div_embauduni"></div>      
+    <div class="hidden" id="div_embauduni"></div>  
+    <div class="hidden" id="div_chart"></div>    
 </div>
     
+    <script src='https://cdn.zingchart.com/zingchart.min.js'></script>
 </body>
 
 </html>

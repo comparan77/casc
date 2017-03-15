@@ -25,8 +25,8 @@ var BeanEntrada_aud_uni_files = function(path) {
 }
 
 var arrTipoTransporte = [];
-var arrLstAudUniFiles = [];
 var arrVigilantes = [];
+var arrLstAudUniFiles = [];
 
 var Arrauduni = function() {
     this.Init = init;
@@ -113,6 +113,16 @@ var Arrauduni = function() {
         x$('#txt_caja1_db').attr('value', 'N.A.');
         x$('#txt_caja2_db').attr('value', 'N.A.');
         x$('#txt_sello_db').attr('value', '');
+        document.getElementById("chk_sello_roto").checked = false;
+        document.getElementById("txt_relato").value = '';
+        x$('#evidencias').html('');
+        arrLstAudUniFiles = [];
+        x$('.coincide_dato').each(function(element, index, xui) { 
+            if(document.getElementById(x$(element).attr('id')).checked) {
+                document.getElementById(x$(element).attr('id')).checked = false;
+                x$(element).fire('click');
+            }
+        });
     }
 
     function init() {
@@ -221,7 +231,7 @@ var Arrauduni = function() {
                 var referencia = String(x$('#txt_referencia').attr('value'));
                 var nopedimento = /(\d{2})(\d{4})(\d{7})/;
                 referencia = referencia.replace(nopedimento, "$1-$2-$3");
-                referencia = '47-3061-7002226';
+                referencia = '47-3061-7002660';
                 OperationModel.precargaGetByRef(referencia, function(data) {
                     Common.loadAjax(false);
                     if(typeof(data)!='object') {
@@ -259,9 +269,16 @@ var Arrauduni = function() {
                     arrLstAudUniFiles
                 );
                 OperationModel.entradaAudUniAdd(oBEAU, function(data) {
-                    alert(data);
+                    if(data===true) {
+                        Common.notificaRegExitoso();                        
+                        window.open(urlHandler + 'rpt/entradas_aud/' + oBEAU.Referencia + '/casc028.pdf?' + new Date().getTime(), '_system', 'location=yes');
+                        clearFormValues();
+                    }
+                    else {
+                        alert(data);
+                    }
                     Common.setEstatusBtn('btn_save', 'Guardar', false);
-                    window.open(urlHandler + 'rpt/entradas_aud/' + oBEAU.Referencia + '/casc028.pdf', '_system', 'location=yes');
+                    
                 });
             } catch (error) {
                 alert(error);
@@ -269,35 +286,3 @@ var Arrauduni = function() {
         });
     }
 }
-
-
-var options = {
-    title: 'titulo',
-    documentView : {
-        closeLabel : 'cerrar'
-    },
-    navigationView : {
-        closeLabel : 'navegar'
-    },
-    email : {
-        enabled : false
-    },
-    print : {
-        enabled : true
-    },
-    openWith : {
-        enabled : true
-    },
-    bookmarks : {
-        enabled : false
-    },
-    search : {
-        enabled : false
-    },
-    autoClose: {
-        onPause : true
-    }
-}
-
-
-

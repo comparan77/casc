@@ -14,6 +14,8 @@ var CAEController = function() {
                 obj = new Arraudmer();
             } else if (type == "embauduni") {
                 obj = new Embauduni();
+            } else if (type == "chart") {
+                obj = new Chart();
             }
             x$('#div_' + type).xhr('./' + type + '.html', {
                 async: true,
