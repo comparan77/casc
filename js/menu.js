@@ -17,6 +17,7 @@ var Menu = function() {
 				if(menuAct != menuSel) 
 				{
 					x$('#div_' + menuAct).addClass('hidden');
+					x$('#div_' + menuAct).html('');
 					removeActive(menuSel);
 					x$('#div_' + menuSel).removeClass('hidden');
 					x$(this).addClass('active');

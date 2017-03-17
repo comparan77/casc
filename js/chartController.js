@@ -1,5 +1,6 @@
-var BeanRptOptions = function(reporte, opcion, anio, mes, id_cliente, id_bodega) {
-    this.Reporte = reporte;
+var BeanChartJs = function(title, opcion, anio, mes, id_cliente, id_bodega) {
+    this.Title = title;
+    this.Data = null;
     this.Opcion = opcion;
     this.Anio = anio;
     this.Mes = mes;
@@ -10,8 +11,51 @@ var BeanRptOptions = function(reporte, opcion, anio, mes, id_cliente, id_bodega)
 var Chart = function() {
     this.Init = init;
 
-    function init() {
+    function changeOptAnios(anioSeleccionado) {
+        var anioMax = new Date().getFullYear();
+        if(anioSeleccionado==undefined)
+            anioSeleccionado = anioMax;
+        x$('#spn_anio_anterior').html(anioSeleccionado-1);
+        x$('#spn_anio_seleccionado').html(anioSeleccionado);
+        x$('#spn_anio_siguiente').html(anioSeleccionado + 1 > anioMax ? '': anioSeleccionado + 1);
+    }
 
+    function initControls() {
+        changeOptAnios();
+        spn_anio_Click();
+    }
+
+    function fillData(oChartJs, data_id, drilldownConfig) {
+        try {
+            Common.loadAjax(true);
+            ReportModel.reporteGet(oChartJs, function(data) {
+                Common.loadAjax(false);
+                var drilldownDataStructure = [];
+                drilldownDataStructure[data_id] = {
+                    "data": data.Data.dataX,
+                    "scale-labels": data.Data.labelX,
+                    //"title": data.Title,
+                    //"colors":["#EF5350","#E53935","#C62828"]
+                };
+                drilldownConfig['title']['text'] = drilldownDataStructure[data_id]['title'];
+                drilldownConfig['scale-x']['values'] = drilldownDataStructure[data_id]['scale-labels'];
+                drilldownConfig['series'][0]['values'] = drilldownDataStructure[data_id]['data'];
+                //drilldownConfig['series'][0]['styles'] = drilldownDataStructure[data_id]['colors'];
+                zingchart.exec('chart_div', 'destroy');
+                zingchart.render({
+                    id : 'drilldown1', 
+                    data : drilldownConfig, 
+                    height: 450, 
+                        width: '100%' 
+                    });
+            });
+        } catch (error) {
+            alert(error);
+        }
+    }
+
+    function init() {
+        initControls();
     var originalConfig = {
             "type":"ring",
             "title":{
@@ -85,6 +129,8 @@ var Chart = function() {
                 "margin":"dynamic"
             },
             "plot":{
+                "value-box":{
+ 	            },
                 "animation":{
                     "delay":10,
                     "effect":"4",
@@ -93,7 +139,7 @@ var Chart = function() {
                     "sequence":"3"
                 },
                 "tooltip":{
-                    "text": "Quantity: %v",
+                    "text": "Cantidad: %v",
                     "shadow":true,
                     "shadowAlpha":.5,
                     "shadowBlur":2,
@@ -118,10 +164,11 @@ var Chart = function() {
                 "item":{
                     "max-chars":9,
                     "color":"#555",
-                    "font-size":12
+                    "font-size":12,
+                    "angle": -30
                 },
                 "label":{
-                    "text":"Type",
+                    "text":"Tipo",
                     "color":"#555",
                     "font-weight":"none",
                     "font-size":16
@@ -140,7 +187,7 @@ var Chart = function() {
                     "visible":false
                 },
                 "label":{
-                    "text":"Quantity",
+                    "text":"Cantidad",
                     "color":"#555",
                     "font-weight":"none",
                     "font-size":16
@@ -162,12 +209,12 @@ var Chart = function() {
         };
 
         var drilldownDataStructure = [];
-        /*drilldownDataStructure["ru"] = {
+        drilldownDataStructure["ru"] = {
             "data":[10,25,35],
             "scale-labels":["Grid-component","Map-tool","Web-charting"],
             "title":"Visualization Tools",
             "colors":["#EF5350","#E53935","#C62828"]
-        };*/
+        };
         drilldownDataStructure["sp"] = {
             "data":[15,5,35,20],
             "scale-labels":["Speed-test","Error-tracking","Load-testing","User-monitoring"],
@@ -196,22 +243,35 @@ var Chart = function() {
         zingchart.node_click = function(p) {
         var plotIndex = p.plotindex;
         var scaleText = p.scaletext;
-        
+        try {
+            var oChartJs = new BeanChartJs(
+                'Unidades', 
+                document.getElementById('ddl_op').value * 1, 
+                x$('#spn_anio_seleccionado').html() * 1,
+                document.getElementById('ddl_mes').value * 1, 
+                document.getElementById('ddl_cliente').value * 1,
+                0);
+            fillData(oChartJs, p['data-id'], drilldownConfig);
+        } catch (error) {
+            alert(error);
+        }
+
         // You could use this data to help construct drilldown graphs check it out...
         //console.log(p);
-        if (drilldownDataStructure[p['data-id']]) {
+        /*if (drilldownDataStructure[p['data-id']]) {
             drilldownConfig['title']['text'] = drilldownDataStructure[p['data-id']]['title'];
             drilldownConfig['scale-x']['values'] = drilldownDataStructure[p['data-id']]['scale-labels'];
             drilldownConfig['series'][0]['values'] = drilldownDataStructure[p['data-id']]['data'];
             drilldownConfig['series'][0]['styles'] = drilldownDataStructure[p['data-id']]['colors'];
             zingchart.exec('chart_div', 'destroy');
+            
             zingchart.render({
                 id : 'drilldown1', 
                 data : drilldownConfig, 
                 height: 450, 
                     width: '100%' 
                 });
-            }
+            }*/
         }
 
         zingchart.shape_click = function(p) {
@@ -235,19 +295,14 @@ var Chart = function() {
 
     }//End init function
 
-    function fillData(rptOptions, title, data_id) {
-        try {
-            ReportModel.reporteGet(rptOptions, function(data) {
-                drilldownDataStructure[data_id] = {
-                    "data":[10,25,35],
-                    "scale-labels":["Grid-component","Map-tool","Web-charting"],
-                    "title": title,
-                    "colors":["#EF5350","#E53935","#C62828"]
-                };
+    function spn_anio_Click() {
+        x$('.optAnio').each(function(element, index, xui) { 
+            x$(element).on('click', function() {
+                var anioClick = x$(element).html() * 1;
+                changeOptAnios(anioClick);
             });
-        } catch (error) {
-            alert(error);
-        }
+        });
     }
+
 }
     

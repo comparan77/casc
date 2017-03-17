@@ -1,8 +1,7 @@
 function ReportModel() {}
 
-ReportModel.reporteGet = function (rptOptions, callback) {
-    var url = urlHandler + 'handlers/CAEApp.ashx?op=reporte';
-    //url += '&referencia=' + referencia;
+ReportModel.reporteGet = function (oChartJs, callback) {
+    var url = urlHandler + 'handlers/CAEApp.ashx?op=reporte&opt=' + oChartJs.Title;
     try {
         Common.fetchJSONFile(
             url, 
@@ -10,7 +9,7 @@ ReportModel.reporteGet = function (rptOptions, callback) {
                 callback(data);
             },
             'POST',
-            JSON.stringify(rptOptions)
+            JSON.stringify(oChartJs)
         );
     } catch (error) {
         alert('reporteGet' + error);

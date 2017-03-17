@@ -32,3 +32,19 @@ OperationModel.entradaAudUniAdd = function (objEntAudUni, callback) {
         alert('entradaAudUniAdd' + error);
     }
 }
+
+OperationModel.entradaAudMerAdd = function (objEntAudMer, callback) {
+    var url = urlHandler + 'handlers/CAEApp.ashx?op=entrada&opt=AudMerAdd';
+    try {
+        Common.fetchJSONFile (
+            url,
+            function(data) {
+                callback(data);
+            },
+            'POST',
+            JSON.stringify(objEntAudMer)
+        );
+    } catch (error) {
+        alert('entradaAudMerAdd' + error);
+    }
+}

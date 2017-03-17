@@ -16,6 +16,7 @@ var BeanEntrada_aud_uni = function (id_entrada_precarga, id_transporte_tipo, ref
     this.Fecha = '01/01/0001';
     this.Vigilante = vigilante;
     this.PLstEntAudUniFiles = lst_files;
+    this.PLstAudImg = lst_files;
 }
 
 var BeanEntrada_aud_uni_files = function(path) {
@@ -27,11 +28,11 @@ var BeanEntrada_aud_uni_files = function(path) {
 var arrTipoTransporte = [];
 var arrVigilantes = [];
 var arrLstAudUniFiles = [];
+var ddlTipoVehiculo = 'ddl_tipovehiculo';
+var ddlVigilante = 'ddl_vigilante';
 
 var Arrauduni = function() {
     this.Init = init;
-    var ddlTipoVehiculo = 'ddl_tipovehiculo';
-    var ddlVigilante = 'ddl_vigilante';
     var divArrauduni = 'div_arrauduni';
     var indPhoto = 1;
 
@@ -137,14 +138,20 @@ var Arrauduni = function() {
                 
                 if(arrTipoTransporte.length == 0 || arrVigilantes == 0) {
                     Common.loadAjax(true);
-                    CatalogosModel.TipoTransporteGetLst(function(data) {
-                        arrTipoTransporte = data;
+                    if(arrTipoTransporte.length == 0)
+                        CatalogosModel.TipoTransporteGetLst(function(data) {
+                            arrTipoTransporte = data;
+                            requestCallback.requestComplete(true);
+                        });
+                    else 
                         requestCallback.requestComplete(true);
-                    });
-                    CatalogosModel.vigilanteGetLst(function(data) {
-                        arrVigilantes = data;
+                    if(arrVigilantes.length == 0)
+                        CatalogosModel.vigilanteGetLst(function(data) {
+                            arrVigilantes = data;
+                            requestCallback.requestComplete(true);
+                        });
+                    else
                         requestCallback.requestComplete(true);
-                    });
                 }
                 else {
                     initControls();
@@ -269,10 +276,10 @@ var Arrauduni = function() {
                     arrLstAudUniFiles
                 );
                 OperationModel.entradaAudUniAdd(oBEAU, function(data) {
-                    if(data===true) {
+                    if(typeof(data)=="object") {
                         Common.notificaRegExitoso();                        
-                        window.open(urlHandler + 'rpt/entradas_aud/' + oBEAU.Referencia + '/casc028.pdf?' + new Date().getTime(), '_system', 'location=yes');
-                        clearFormValues();
+                        window.open(urlHandler + 'rpt/entradas_aud/' + data.Referencia + '/' + data.prefixImg + 'casc028.pdf?' + new Date().getTime(), '_system', 'location=yes');
+                        clearFormValues(); 
                     }
                     else {
                         alert(data);

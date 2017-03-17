@@ -112,7 +112,7 @@ ul.topnav li.icon {display: none;}
 .center-inner{width:500px;height:100%;margin-left:-250px;height:300px;text-align:center;max-width:500px;max-height:500px;}}
 
 /*Operation*/
-h1
+h1, .selected
 {
   color: #0d5fb5;
 }
