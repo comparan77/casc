@@ -54,7 +54,20 @@ var Chart = function() {
         }
     }
 
+
+var nlJS = 0;
+
+  function jsLoaded() {
+     var jss = document.getElementsByTagName('script');
+     for (var i = 0; i < js.length; i ++) {
+         alert(jss[i]);
+    }
+  }
+
     function init() {
+
+
+
         initControls();
     var originalConfig = {
             "type":"ring",
