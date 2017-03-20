@@ -66,7 +66,7 @@ var nlJS = 0;
 
     function init() {
 
-
+jsLoaded();
 
         initControls();
     var originalConfig = {
