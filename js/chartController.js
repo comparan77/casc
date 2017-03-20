@@ -112,13 +112,17 @@ var Chart = function() {
                 }
             ]
         }
-
-        zingchart.render({
+try {
+    zingchart.render({
             id : 'chart_div', 
             data : originalConfig, 
             height: 450, 
             width: '100%' 
         });
+} catch (error) {
+    alert(error);
+}
+        
 
         var drilldownConfig = {
             "type":"bar",
