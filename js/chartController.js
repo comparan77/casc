@@ -54,13 +54,10 @@ var Chart = function() {
         }
     }
 
-
-var nlJS = 0;
-
   function jsLoaded() {
      var jss = document.getElementsByTagName('script');
-     for (var i = 0; i < js.length; i ++) {
-         alert(jss[i]);
+     for (var i = 0; i < jss.length; i ++) {
+         alert(jss[i].getAttribute('src'));
     }
   }
 

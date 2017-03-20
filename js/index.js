@@ -18,7 +18,7 @@
  */
 
 //var lstTarima = [];
-var urlHandler = 'http://yaaxil.ddns.net:82/'; //'http://cascserver.ddns.net:8083/';
+var urlHandler = 'http://192.168.1.66:82/'; //'http://cascserver.ddns.net:8083/';
 var oUsuario;
 var oCAEController = new CAEController();
 var menuAct = 'inicio';
