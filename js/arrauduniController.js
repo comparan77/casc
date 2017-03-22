@@ -35,6 +35,7 @@ var Arrauduni = function() {
     this.Init = init;
     var divArrauduni = 'div_arrauduni';
     var indPhoto = 1;
+    var oSearchData;
 
     function evaluaDatosRequeridos(Id) {
         for(var i = 0; i < arrTipoTransporte.length; i++) {
@@ -69,7 +70,16 @@ var Arrauduni = function() {
         checkCoincide_Change();
         btn_capturePhoto_Click();
         btn_save_Click();
-        btn_search_Click();
+        oSearchData = new InputSearch({
+            content: 'searchData',
+            typeDataSearch: 'pedimento',
+            clickBtnSearch: clearFormValues,
+            callbackBtnSearch: function(data) {
+                fillForm(data);
+            },
+            functionModel: OperationModel.precargaGetByRef
+        });
+        //btn_search_Click();
     }
 
     function photoReady(imageData) {
@@ -230,7 +240,7 @@ var Arrauduni = function() {
         });
     }
 
-    function btn_search_Click() {
+    /*function btn_search_Click() {
         x$('#btn_search').on('click', function() {
             Common.setEstatusBtn('btn_search', 'Buscando', true);
             clearFormValues();
@@ -253,7 +263,7 @@ var Arrauduni = function() {
                 alert(error);
             }
         });
-    }
+    }*/
 
     function btn_save_Click() {
         x$('#btn_save').on('click', function() {

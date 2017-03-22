@@ -50,11 +50,23 @@ Common.fetchJSONFile = function (path, callback, type, jsonData) {
 
 /**Cambia el estado de un boton mientras se ejecutan las llamadas asincronas */
 Common.setEstatusBtn = function(element, text, disabled) {
-    if(disabled)
-        x$('#' + element).html(text + '...').attr('disabled','disabled');
+    if(disabled) {
+        if(typeof(element)==='string')
+            x$('#' + element).html(text + '...').attr('disabled','disabled');
+        else {
+            element.setAttribute('disabled', 'disabled');
+            element.innerHTML = text;
+        }
+    }
     else {
-        x$('#' + element).html(text);
-        document.getElementById(element).removeAttribute('disabled');
+        if(typeof(element)==='string') {
+            x$('#' + element).html(text);
+            document.getElementById(element).removeAttribute('disabled');
+        }
+        else {
+            element.removeAttribute('disabled');
+            element.innerHTML = text;
+        }
     }
 }
  
