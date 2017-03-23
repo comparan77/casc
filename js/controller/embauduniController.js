@@ -1,6 +1,7 @@
 var arrCondTran = [];
 var Embauduni = function() {
     this.Init = init;
+    var oSearchData;
 
     function fillCondicionesTransporte() {
         x$('#tbody_condiciones').html('');
@@ -34,17 +35,45 @@ var Embauduni = function() {
 
     function initControls() {
         fillCondicionesTransporte();
+        oSearchData = new InputSearch({
+            content: 'searchData',
+            typeDataSearch: 'ordencarga',
+            txtPlaceHolder: 'Orden de Carga',
+            // clickBtnSearch: clearFormValues,
+            // callbackBtnSearch: function(data) {
+            //     fillForm(data);
+            // },
+            // functionModel: OperationModel.precargaGetByRef
+        });
+        Common.fillDropDownList(ddlVigilante, arrVigilantes);
     }
 
     function init() {
         try {
-                if(arrCondTran.length == 0) {
-                    Common.loadAjax(true);
-                    CatalogosModel.TransporteCondicionesGetLst(1, false, true, function(data) {
+                var requestCallback = new MyRequestsCompleted({
+                    numRequest: 2,
+                    singleCallback: function(){
                         Common.loadAjax(false);
-                        arrCondTran = data.PLstTransporte_condicion;
                         initControls();
-                    });
+                    }
+                });
+                if(arrCondTran.length == 0 || arrVigilantes == 0) {
+                    Common.loadAjax(true);
+                    if(arrCondTran.length == 0) {
+                        CatalogosModel.TransporteCondicionesGetLst(1, false, true, function(data) {
+                            arrCondTran = data.PLstTransporte_condicion;
+                            requestCallback.requestComplete(true);
+                        });
+                    }
+                    else 
+                        requestCallback.requestComplete(true);
+                    if(arrVigilantes.length == 0)
+                        CatalogosModel.vigilanteGetLst(function(data) {
+                            arrVigilantes = data;
+                            requestCallback.requestComplete(true);
+                        });
+                    else
+                        requestCallback.requestComplete(true);
                 }
                 else {
                     initControls();

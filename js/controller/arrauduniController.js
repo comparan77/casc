@@ -1,30 +1,3 @@
-var BeanEntrada_aud_uni = function (id_entrada_precarga, id_transporte_tipo, referencia, operador, placa, caja, caja1, caja2, sello, sello_roto, acta_informativa, vigilante, lst_files) {
-    this.PUsuario = oUsuario;
-    this.Id = 0;
-    this.Id_entrada_pre_carga = id_entrada_precarga;
-    this.Id_transporte_tipo = id_transporte_tipo;
-    this.Informa = oUsuario.Nombre;
-    this.Referencia = referencia;
-    this.Operador = operador;
-    this.Placa = placa;
-    this.Caja = caja;
-    this.Caja1 = caja1;
-    this.Caja2 = caja2;
-    this.Sello = sello;
-    this.Sello_roto = sello_roto;
-    this.Acta_informativa = acta_informativa;
-    this.Fecha = '01/01/0001';
-    this.Vigilante = vigilante;
-    this.PLstEntAudUniFiles = lst_files;
-    this.PLstAudImg = lst_files;
-}
-
-var BeanEntrada_aud_uni_files = function(path) {
-    this.Id = 0;
-    this.Id_entrada_aud_uni = 0;
-    this.Path = path;
-}
-
 var arrTipoTransporte = [];
 var arrVigilantes = [];
 var arrLstAudUniFiles = [];

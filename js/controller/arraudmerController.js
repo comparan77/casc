@@ -1,40 +1,24 @@
-var BeanEntrada_aud_mer = function (id_entrada_precarga, referencia, operador, entrada_unica, bulto_declarado, bulto_recibido, bulto_abierto, bulto_danado, pallet, acta_informativa, vigilante, lst_files) {
-    this.PUsuario = oUsuario;
-    this.Id = 0;
-    this.Id_entrada_pre_carga = id_entrada_precarga;
-    this.Informa = oUsuario.Nombre;
-    this.Referencia = referencia;
-    this.Notificado = operador;
-    this.Entrada_unica = entrada_unica;
-    this.No_entrada = 0;
-    this.Bulto_declarado = bulto_declarado;
-    this.Bulto_recibido = bulto_recibido;
-    this.Bulto_abierto = bulto_abierto;
-    this.Bulto_danado = bulto_danado;
-    this.Pallet = pallet;
-    this.Acta_informativa = acta_informativa;
-    this.Fecha = '01/01/0001';
-    this.Vigilante = vigilante;
-    this.PLstEntAudMerFiles = lst_files;
-}
-
-var BeanEntrada_aud_mer_files = function(path) {
-    this.Id = 0;
-    this.Id_entrada_aud_mer = 0;
-    this.Path = path;
-}
-
 var arrLstAudMerFiles = [];
 
 var Arraudmer = function() {
     this.Init = init;
     var indPhoto = 1;
+    var oSearchData;
 
     function initControls() {
         chk_parcial_checked();
         Common.fillDropDownList(ddlVigilante, arrVigilantes);
         btn_capturePhoto_Click();
-        btn_search_Click();
+        oSearchData = new InputSearch({
+            content: 'searchData',
+            typeDataSearch: 'pedimento',
+            txtPlaceHolder: 'No. de Pedimento',
+            clickBtnSearch: clearFormValues,
+            callbackBtnSearch: function(data) {
+                fillForm(data);
+            },
+            functionModel: OperationModel.precargaGetByRef
+        });
         btn_save_Click();
     }
 
@@ -113,7 +97,7 @@ var Arraudmer = function() {
         });
     }
 
-    function btn_search_Click() {
+    /*function btn_search_Click() {
         x$('#btn_search').on('click', function() {
             Common.setEstatusBtn('btn_search', 'Buscando', true);
             clearFormValues();
@@ -136,7 +120,7 @@ var Arraudmer = function() {
                 alert(error);
             }
         });
-    }
+    }*/
 
     function btn_save_Click() {
         x$('#btn_save').on('click', function() {

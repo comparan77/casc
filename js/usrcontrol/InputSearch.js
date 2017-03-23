@@ -87,7 +87,7 @@
                 dato = dato.replace(nopedimento, "$1-$2-$3");
                 break;
             default:
-                alert('the dta type not exists...')
+                alert('the data type not exists...')
                 break;
         }
         return dato;
