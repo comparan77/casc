@@ -45,7 +45,7 @@ var Arrauduni = function() {
         btn_save_Click();
         oSearchData = new InputSearch({
             content: 'searchData',
-            typeDataSearch: 'pedimento',
+            maskDataSearch: 'pedimento',
             clickBtnSearch: clearFormValues,
             callbackBtnSearch: function(data) {
                 fillForm(data);
@@ -65,8 +65,8 @@ var Arrauduni = function() {
 
     function fillForm(data) {
         try {
-            x$('#h_id_entrada_precarga').attr('value', data.Id);
-            x$('#h_referencia').attr('value', data.Referencia);
+            // x$('#h_id_entrada_precarga').attr('value', data.Id);
+            // x$('#h_referencia').attr('value', data.Referencia);
             x$('#txt_operador_db').attr('value', data.Operador).removeClass('hidden');
             x$('#txt_tipovehiculo_db').attr('value', findTransporteById(data.Id_transporte_tipo)).removeClass('hidden');
             document.getElementById(ddlTipoVehiculo).value = data.Id_transporte_tipo;
@@ -213,40 +213,15 @@ var Arrauduni = function() {
         });
     }
 
-    /*function btn_search_Click() {
-        x$('#btn_search').on('click', function() {
-            Common.setEstatusBtn('btn_search', 'Buscando', true);
-            clearFormValues();
-            try {
-                var referencia = String(x$('#txt_referencia').attr('value'));
-                var nopedimento = /(\d{2})(\d{4})(\d{7})/;
-                referencia = referencia.replace(nopedimento, "$1-$2-$3");
-                referencia = '47-3061-7002660';
-                OperationModel.precargaGetByRef(referencia, function(data) {
-                    Common.loadAjax(false);
-                    if(typeof(data)!='object') {
-                        Common.notificationAlert(data, 'Alerta', 'Ok')
-                    }
-                    else {
-                        fillForm(data);
-                    }
-                    Common.setEstatusBtn('btn_search', 'Buscar', false);
-                });
-            } catch (error) {
-                alert(error);
-            }
-        });
-    }*/
-
     function btn_save_Click() {
         x$('#btn_save').on('click', function() {
              Common.setEstatusBtn('btn_save', 'Guardando', true);
             try {
                 var optionVigilante = document.getElementById('ddl_vigilante');
                 var oBEAU = new BeanEntrada_aud_uni(
-                    x$('#h_id_entrada_precarga').attr('value') * 1,
+                    x$('#h_id_dato').attr('value') * 1,
                     x$('#txt_tipovehiculo').attr('value') * 1,
-                    String(x$('#h_referencia').attr('value')),
+                    String(x$('#h_txt_dato').attr('value')),
                     String(x$('#txt_operador').attr('value')),
                     String(x$('#txt_placa').attr('value')),
                     String(x$('#txt_caja').attr('value')),

@@ -11,7 +11,7 @@ var Arraudmer = function() {
         btn_capturePhoto_Click();
         oSearchData = new InputSearch({
             content: 'searchData',
-            typeDataSearch: 'pedimento',
+            maskDataSearch: 'pedimento',
             txtPlaceHolder: 'No. de Pedimento',
             clickBtnSearch: clearFormValues,
             callbackBtnSearch: function(data) {

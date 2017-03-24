@@ -16,7 +16,8 @@
             functionModel: '',
             clickBtnSearch: '',
             callbackBtnSearch: '',
-            typeDataSearch: ''
+            maskDataSearch: '',
+            typeDataSearch: 'text'
         }
 
         // Create options by extending defaults with the passed in arugments
@@ -33,7 +34,7 @@
         content = document.getElementById(this.options.content);
         content.className = 'pure-form' + this.options.className;
         this.searchTxtDato = document.createElement('input');
-        this.searchTxtDato.setAttribute('type', 'number')
+        this.searchTxtDato.setAttribute('type', this.options.typeDataSearch)
         this.searchTxtDato.setAttribute('id', 'txt_dato');
         this.searchTxtDato.setAttribute('placeHolder', this.options.txtPlaceHolder);
         this.searchTxtDato.className = 'pure-input-rounded';
@@ -81,10 +82,24 @@
 
     function maskDataSearch() {
         var dato = this.searchTxtDato.value;
-        switch (this.options.typeDataSearch) {
+        var patron = '';
+        switch (this.options.maskDataSearch) {
             case 'pedimento':
-                var nopedimento = /(\d{2})(\d{4})(\d{7})/;
-                dato = dato.replace(nopedimento, "$1-$2-$3");
+                patron = /(\d{2})(\d{4})(\d{7})/;
+                dato = dato.replace(patron, "$1-$2-$3");
+                break;
+            case 'ordencarga':
+                if(dato.length < 1) return dato;
+                patron = /^(\d{1,5})((\-)([1,2])(\d{1}))?$/;
+                dato = dato.match(patron)[0]; 
+                dato = dato.indexOf('-') == -1 ? dato + '-' + new Date().getFullYear().toString().substr(-2) : dato;
+                var folio_anio = dato.split('-');
+                var folio = folio_anio[0];
+                var str = "" + folio;
+                var pad = "00000"
+                var ans = pad.substring(0, pad.length - str.length) + str;
+                dato = 'ORC-' + ans + '-' + folio_anio[1];
+                this.searchTxtDato.value = dato;
                 break;
             default:
                 alert('the data type not exists...')
