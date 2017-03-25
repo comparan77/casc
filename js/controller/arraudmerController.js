@@ -128,8 +128,8 @@ var Arraudmer = function() {
             try {
                 var optionVigilante = document.getElementById('ddl_vigilante');
                 var oBEAM = new BeanEntrada_aud_mer(
-                    x$('#h_id_entrada_precarga').attr('value') * 1,
-                    String(x$('#h_referencia').attr('value')),
+                    x$('#h_id_dato').attr('value') * 1,
+                    String(x$('#h_txt_dato').attr('value')),
                     String(x$('#txt_operador').attr('value')),
                     document.getElementById("chk_parcial").checked,
                     String(x$('#txt_bulto_declarado').attr('value')) * 1,

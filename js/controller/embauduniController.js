@@ -62,6 +62,7 @@ var Embauduni = function() {
         Common.fillDropDownList(ddlVigilante, arrVigilantes);
         btn_capturePhoto_Click();
         ddlTipoVehiculo_Change();
+        btn_save_Click();
     }
 
     function fillForm(data) {
