@@ -56,7 +56,17 @@ var Chart = function() {
 
     function init() {
         initControls();
-    var originalConfig = {
+        try {
+            initChart();
+        } catch (error) {
+            alert(error);
+        }
+
+    }//End init function
+
+    function initChart() {
+
+        var originalConfig = {
             "type":"ring",
             "title":{
             "text":""
@@ -293,7 +303,7 @@ var Chart = function() {
             }
         }
 
-    }//End init function
+    }
 
     function spn_anio_Click() {
         x$('.optAnio').each(function(element, index, xui) { 
