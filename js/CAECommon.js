@@ -90,9 +90,12 @@ Common.loadAjax = function(state) {
 }
 
 /**Llena un select  */
-Common.fillDropDownList = function (ddl, data) {
+Common.fillDropDownList = function (ddl, data, firstOpt) {
     var opts = '';
     x$('#' + ddl).html('');
+    if(typeof(firstOpt)==='string') {
+        opts+= '<option value=0>' + firstOpt + '</option>';
+    }
     for(var x in data) {
         opts+= '<option value=' + data[x].Id + '>' + data[x].Nombre + '</option>';
     }

@@ -1,3 +1,4 @@
+var arrClientes = [];
 var BeanChartJs = function(title, opcion, anio, mes, id_cliente, id_bodega) {
     this.Title = title;
     this.Data = null;
@@ -25,12 +26,24 @@ var Chart = function() {
         spn_anio_Click();
         ddl_mes_change();
         ddl_op_change();
+        ddl_cliente_change();
+        Common.fillDropDownList('ddl_cliente', arrClientes, 'Todos');
+        initCallData();
     }
 
     function init() {
-        initControls();
         try {
-            initCallData();
+            if(arrClientes.length == 0) {
+                    Common.loadAjax(true);
+                    CatalogosModel.ClienteGetAll(function(data) {
+                        arrClientes = data;
+                        Common.loadAjax(false);
+                        initControls();
+                    });
+            }
+            else {
+                initControls();
+            }
         } catch (error) {
             alert(error);
         }
@@ -146,6 +159,12 @@ var options = {
 
     function ddl_op_change() {
         x$('#ddl_op').on('change', function() {
+            initCallData();
+        });
+    }
+
+    function ddl_cliente_change() {
+        x$('#ddl_cliente').on('change', function() {
             initCallData();
         });
     }

@@ -18,6 +18,22 @@ CatalogosModel.UsuarioCredencialesValidas = function (obj, callback) {
     }
 }
 
+/**Clientes */
+CatalogosModel.ClienteGetAll = function (callback) {
+    var url = urlHandler + 'handlers/catalog.ashx?catalogo=cliente&opt=getAll';
+    try {
+        var opts = '';
+        Common.fetchJSONFile(
+            url, 
+            function(data) {
+                callback(data);
+            }, 
+            'GET');
+    } catch (error) {
+        alert(error);
+    }
+}
+
 /**Transportes */
 CatalogosModel.TipoTransporteGetLst = function (callback) {
     var url = urlHandler + 'handlers/catalog.ashx?catalogo=transporte_tipo';
