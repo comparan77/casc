@@ -26,7 +26,6 @@ var Tarima = function(tarima, posicion) {
     this.Tarima = tarima;
     this.Posicion = posicion;
 }
-
 var oIndexCtrl = new IndexController();
 
 var app = {
@@ -50,11 +49,12 @@ var app = {
         destinationType=navigator.camera.DestinationType; 
         app.receivedEvent('deviceready');
         FastClick.attach(document.body);
+        
     },
     // Update DOM on a Received Event
     receivedEvent: function(id) {
         try {
-            //oCtrlr.InitMenu();
+            //oCtrlr.InitMenu(); 
             oCAEController.Create('login');
         } catch (error) {
             alert(error.message);
