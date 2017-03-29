@@ -23,335 +23,108 @@ var Chart = function() {
     function initControls() {
         changeOptAnios();
         spn_anio_Click();
-    }
-
-    function fillData(oChartJs, data_id, drilldownConfig) {
-        try {
-            Common.loadAjax(true);
-            ReportModel.reporteGet(oChartJs, function(data) {
-                Common.loadAjax(false);
-                var drilldownDataStructure = [];
-                drilldownDataStructure[data_id] = {
-                    "data": data.Data.dataX,
-                    "scale-labels": data.Data.labelX,
-                    //"title": data.Title,
-                    //"colors":["#EF5350","#E53935","#C62828"]
-                };
-                drilldownConfig['title']['text'] = drilldownDataStructure[data_id]['title'];
-                drilldownConfig['scale-x']['values'] = drilldownDataStructure[data_id]['scale-labels'];
-                drilldownConfig['series'][0]['values'] = drilldownDataStructure[data_id]['data'];
-                //drilldownConfig['series'][0]['styles'] = drilldownDataStructure[data_id]['colors'];
-                zingchart.exec('chart_div', 'destroy');
-                zingchart.render({
-                    id : 'drilldown1', 
-                    data : drilldownConfig, 
-                    height: 450, 
-                        width: '100%' 
-                    });
-            });
-        } catch (error) {
-            alert(error);
-        }
+        ddl_mes_change();
+        ddl_op_change();
     }
 
     function init() {
         initControls();
         try {
-            initHighChart();
+            initCallData();
         } catch (error) {
             alert(error);
         }
 
     }//End init function
 
-    function initHighChart() {
+    function initCallData() {
 
-        Highcharts.chart('container', {
-
-    title: {
-        text: 'Solar Employment Growth by Sector, 2010-2016'
-    },
-
-    subtitle: {
-        text: 'Source: thesolarfoundation.com'
-    },
-
-    yAxis: {
-        title: {
-            text: 'Number of Employees'
-        }
-    },
-    legend: {
-        layout: 'vertical',
-        align: 'right',
-        verticalAlign: 'middle'
-    },
-
-    plotOptions: {
-        series: {
-            pointStart: 2010
-        }
-    },
-
-    series: [{
-        name: 'Installation',
-        data: [43934, 52503, 57177, 69658, 97031, 119931, 137133, 154175]
-    }, {
-        name: 'Manufacturing',
-        data: [24916, 24064, 29742, 29851, 32490, 30282, 38121, 40434]
-    }, {
-        name: 'Sales & Distribution',
-        data: [11744, 17722, 16005, 19771, 20185, 24377, 32147, 39387]
-    }, {
-        name: 'Project Development',
-        data: [null, null, 7988, 12169, 15112, 22452, 34400, 34227]
-    }, {
-        name: 'Other',
-        data: [12908, 5948, 8105, 11248, 8989, 11816, 18274, 18111]
-    }]
-
-});
-
+        var oChartJs = new BeanChartJs(
+            'Unidades', 
+            document.getElementById('ddl_op').value * 1, 
+            x$('#spn_anio_seleccionado').html() * 1,
+            document.getElementById('ddl_mes').value * 1, 
+            document.getElementById('ddl_cliente').value * 1,
+            0);
+        
+        ReportModel.reporteGet(oChartJs, function(data) {
+            initHighChart(data);
+        });
     }
 
-    function initChart() {
+    function initHighChart(data) {
 
-        var originalConfig = {
-            "type":"ring",
-            "title":{
-            "text":""
-            },
-            "plot":{
-                "detach":false,
-                "cursor":"hande",
-                "shadow":8,
-                "tooltip":{
-                    "visible":false
-                },
-                "animation":{
-                    "delay":10,
-                    "effect":"2",
-                    "speed":"ANIMATION_FAST",
-                    "method":"1",
-                    "sequence":"3",
-                    "attributes":{
-                        
-                    }
-                },
-                "value-box":{
-                    "color":"#FFF",
-                    "text":"%t",
-                    "font-weight":"none",
-                    "font-size":14
-                }
-            },
-            "series":[
-                {
-                    "values":[69],
-                    "background-color":"#F44336",
-                    "text":"Transportes",
-                    "data-id":"ru"
-                },
-                {
-                    "values":[69],
-                    "background-color":"#009688",
-                    "text":"Pallets",
-                    "data-id":"rt"
-                },
-                {
-                    "values":[69],
-                    "background-color":"#00BCD4",
-                    "text":"Bultos",
-                    "data-id":"rb"
-                },
-                {
-                    "values":[69],
-                    "background-color":"#03A9F4",
-                    "text":"Piezas",
-                    "data-id":"rp"
-                }
-            ]
+var options = {
+    chart: {
+        type: 'column'
+    },
+    title: {
+        text: 'Transportes'
+    },
+    /*subtitle: {
+        text: 'Source: WorldClimate.com'
+    },*/
+    xAxis: {
+        categories: [
+            /*'Jan',
+            'Feb',
+            'Mar',
+            'Apr',
+            'May',
+            'Jun',
+            'Jul',
+            'Aug',
+            'Sep',
+            'Oct',
+            'Nov',
+            'Dec'*/
+        ],
+        crosshair: true
+    },
+    yAxis: {
+        min: 0,
+        title: {
+            text: 'Cantidad'
         }
-
-        zingchart.render({
-            id : 'chart_div', 
-            data : originalConfig, 
-            height: 450, 
-            width: '100%' 
-        });
-
-        var drilldownConfig = {
-            "type":"bar",
-            "title":{
-                "text":"Security Tools"
-            },
-            "plotarea": {
-                "margin":"dynamic"
-            },
-            "plot":{
-                "value-box":{
- 	            },
-                "animation":{
-                    "delay":10,
-                    "effect":"4",
-                    "speed":"1200",
-                    "method":"1",
-                    "sequence":"3"
-                },
-                "tooltip":{
-                    "text": "Cantidad: %v",
-                    "shadow":true,
-                    "shadowAlpha":.5,
-                    "shadowBlur":2,
-                    "shadowDistance":3,
-                    "shadowColor":"#c4c4c4",
-                    "borderWidth":0,
-                    "font-size":18
-                }
-            },
-            "series":[
-                {
-                    "values":[35,15,25,10],
-                    "styles":["#1565C0","#42A5F5","#1E88E5","#90CAF9"]
-                }
-            ],
-            "scale-x":{
-                "line-color":"#555",
-                "tick":{
-                    "line-color":"#555"
-                },
-                "values":["Firewall","Cache-control","Link-access","HTTP-Comp"],
-                "item":{
-                    "max-chars":9,
-                    "color":"#555",
-                    "font-size":12,
-                    "angle": -30
-                },
-                "label":{
-                    "text":"Tipo",
-                    "color":"#555",
-                    "font-weight":"none",
-                    "font-size":16
-                }
-            },
-            "scale-y":{
-                "line-color":"#555",
-                "tick":{
-                    "line-color":"#555"
-                },
-                "item":{
-                    "color":"#555",
-                    "font-size":12
-                },
-                "guide":{
-                    "visible":false
-                },
-                "label":{
-                    "text":"Cantidad",
-                    "color":"#555",
-                    "font-weight":"none",
-                    "font-size":16
-                }
-            },
-            "shapes":[
-            {
-                'x':20,
-                'y':20,
-                'size':10,
-                'angle':-90,
-                'type':'triangle',
-                'background-color':'#C4C4C4',
-                'padding':5,
-                'cursor':'hand',
-                'id': 'backwards'
-            }
-            ]
-        };
-
-        var drilldownDataStructure = [];
-        drilldownDataStructure["ru"] = {
-            "data":[10,25,35],
-            "scale-labels":["Grid-component","Map-tool","Web-charting"],
-            "title":"Visualization Tools",
-            "colors":["#EF5350","#E53935","#C62828"]
-        };
-        drilldownDataStructure["sp"] = {
-            "data":[15,5,35,20],
-            "scale-labels":["Speed-test","Error-tracking","Load-testing","User-monitoring"],
-            "title":"Site Performance",
-            "colors":["#26A69A","#80CBC4","#00695C","#00897B"]
-        };
-        drilldownDataStructure["dt"] = {
-            "data":[20,8,35,20],
-            "scale-labels":["IDE","File-Management","Image-Generation","QA-testing"],
-            "title":"Dev Tools",
-            "colors":['#26C6DA','#80DEEA','#00838F','#00ACC1']
-        };
-        drilldownDataStructure["st"] = {
-            "data":[35,15,25,10],
-            "scale-labels":["Firewall","Cache-control","Link-access","HTTP-Comp"],
-            "title":"Security Tools",
-            "colors":["#1565C0","#42A5F5","#1E88E5","#90CAF9"]
-        };
-        drilldownDataStructure["dm"] = {
-            "data":[10,25,35],
-            "scale-labels":["Relational","Non-relational","Cluster"],
-            "title":"Data Management",
-            "colors":["#5E35B1","#4527A0","#7E57C2"]
-        };
-
-        zingchart.node_click = function(p) {
-        var plotIndex = p.plotindex;
-        var scaleText = p.scaletext;
-        try {
-            var oChartJs = new BeanChartJs(
-                'Unidades', 
-                document.getElementById('ddl_op').value * 1, 
-                x$('#spn_anio_seleccionado').html() * 1,
-                document.getElementById('ddl_mes').value * 1, 
-                document.getElementById('ddl_cliente').value * 1,
-                0);
-            fillData(oChartJs, p['data-id'], drilldownConfig);
-        } catch (error) {
-            alert(error);
+    },
+    tooltip: {
+        headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
+        pointFormat: '<tr><td style="color:{series.color};padding:0"></td>' +
+            '<td style="padding:0"><b>{point.y:.1f} </b></td></tr>',
+        footerFormat: '</table>',
+        shared: true,
+        useHTML: true
+    },
+    plotOptions: {
+        column: {
+            pointPadding: 0.2,
+            borderWidth: 0
         }
+    },
+    series: [{}/*{
+        name: 'Tokyo',
+        data: [49.9, 71.5, 106.4, 129.2, 144.0, 176.0, 135.6, 148.5, 216.4, 194.1, 95.6, 54.4]
 
-        // You could use this data to help construct drilldown graphs check it out...
-        //console.log(p);
-        /*if (drilldownDataStructure[p['data-id']]) {
-            drilldownConfig['title']['text'] = drilldownDataStructure[p['data-id']]['title'];
-            drilldownConfig['scale-x']['values'] = drilldownDataStructure[p['data-id']]['scale-labels'];
-            drilldownConfig['series'][0]['values'] = drilldownDataStructure[p['data-id']]['data'];
-            drilldownConfig['series'][0]['styles'] = drilldownDataStructure[p['data-id']]['colors'];
-            zingchart.exec('chart_div', 'destroy');
-            
-            zingchart.render({
-                id : 'drilldown1', 
-                data : drilldownConfig, 
-                height: 450, 
-                    width: '100%' 
-                });
-            }*/
-        }
+    }, {
+        name: 'New York',
+        data: [83.6, 78.8, 98.5, 93.4, 106.0, 84.5, 105.0, 104.3, 91.2, 83.5, 106.6, 92.3]
 
-        zingchart.shape_click = function(p) {
-        var shapeId = p.shapeid;
-        //console.log(p);
-        
-        switch(shapeId) {
-            case 'forwards':
-            case 'backwards':
-            case 'default':
-            zingchart.exec('drilldown1', 'destroy');
-            zingchart.render({
-                id : 'chart_div', 
-                data : originalConfig, 
-                height: 450, 
-                width: '100%' 
-                });
-            break;
-            }
+    }, {
+        name: 'London',
+        data: [48.9, 38.8, 39.3, 41.4, 47.0, 48.3, 59.0, 59.6, 52.4, 65.2, 59.3, 51.2]
+
+    }, {
+        name: 'Berlin',
+        data: [42.4, 33.2, 34.5, 39.7, 52.6, 75.5, 57.4, 60.4, 47.6, 39.1, 46.8, 51.1]
+
+    }*/]
+}
+        for(var i in data.Data.labelX) {
+            options.xAxis.categories.push(data.Data.labelX[i]);
         }
+        options.series[0].data = data.Data.dataX;
+        options.series[0].name = 'Tipos de Transporte';
+        Highcharts.chart('container', options);
 
     }
 
@@ -360,7 +133,20 @@ var Chart = function() {
             x$(element).on('click', function() {
                 var anioClick = x$(element).html() * 1;
                 changeOptAnios(anioClick);
+                initCallData();
             });
+        });
+    }
+
+    function ddl_mes_change() {
+        x$('#ddl_mes').on('change', function() {
+            initCallData();
+        });
+    }
+
+    function ddl_op_change() {
+        x$('#ddl_op').on('change', function() {
+            initCallData();
         });
     }
 
