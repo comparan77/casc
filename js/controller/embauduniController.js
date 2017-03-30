@@ -82,13 +82,35 @@ var Embauduni = function() {
         x$('#txt_hora_cita_db').attr('value','');
         x$('#txt_linea_transporte_db').attr('value', '');
         x$('#txt_tipo_transporte_db').attr('value', '');
-        
+        arrLstAudUniFiles = [];
+        x$('#evidencias').html('');
+    }
+
+    function confirmDeletePhoto(obj) {
+        var searchTerm = obj.getAttribute('id').split('_')[1];
+        index = -1;
+        for(var i = 0, len = arrLstAudUniFiles.length; i < len; i++) {
+            if (arrLstAudUniFiles[i].Id == searchTerm) {
+                index = i;
+                break;
+            }
+        }
+        if ( index !== -1 ) {
+            arrLstAudUniFiles.splice( index, 1 );
+            var parent = document.getElementById('evidencias');
+            var children = obj;
+            parent.removeChild(obj);
+        }
+
     }
 
     function photoReady(imageData) {
         var img = '<img class="pure-img" src="data:image/jpeg;base64,' + imageData + '" >';
         x$('#evidencias').html('top', '<div id="photo_' + indPhoto + '" class="pure-u-1-2"><div class="l-box">' + img + '</div></div>');
-        var oImg = new BeanSalida_aud_uni_files(imageData);
+        x$('#photo_' + indPhoto).on('click', function(){
+            confirmDeletePhoto(this);
+        });
+        var oImg = new BeanSalida_aud_uni_files(indPhoto, imageData);
         arrLstAudUniFiles.push(oImg);
         indPhoto++;
     }
@@ -174,15 +196,14 @@ var Embauduni = function() {
                 );
                 OperationModel.salidaAudUniAdd(oBSAU, function(data) {
                     if(typeof(data)=="object") {
-                        Common.notificaRegExitoso();                        
+                        Common.notificaRegExitoso();  
                         window.open(urlHandler + 'rpt/salidas_aud/' + data.Referencia + '/' + data.prefixImg + 'casc028.pdf?' + new Date().getTime(), '_system', 'location=yes');
-                        clearFormValues(); 
                     }
                     else {
                         alert(data);
                     }
                     Common.setEstatusBtn('btn_save', 'Guardar', false);
-                    
+                    clearFormValues();                    
                 });
             } catch (error) {
                 alert(error);

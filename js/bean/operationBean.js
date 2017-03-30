@@ -85,8 +85,8 @@ var BeanSalida_aud_uni = function (id_salida_orden_carga, id_transporte_tipo, re
 /** @description Salida Auditoria Unidades Fotos
  * @param  {string} path
  */
-var BeanSalida_aud_uni_files = function(path) {
-    this.Id = 0;
+var BeanSalida_aud_uni_files = function(id, path) {
+    this.Id = id;
     this.Id_salida_aud_uni = 0;
     this.Path = path;
 }
